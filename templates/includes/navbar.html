@@ -1,0 +1,37 @@
+{% load static %}
+<!-- Top Information & Scripture Bar -->
+<div class="top-bar">
+  <div class="container top-bar-content">
+    <div class="top-scripture">
+      <span class="badge">John 3:16</span>
+      <span>"That whoever believes in HIM should not perish but have eternal life" • <em>Roho nzima itura mu mubiri muzima</em></span>
+    </div>
+    <ul class="top-contact-links">
+      <li><a href="tel:+250788812075"><i class="fas fa-phone-alt"></i> (+250) 788 812 075</a></li>
+      <li><a href="mailto:info@mouvementpourchriste.org"><i class="fas fa-envelope"></i> info@mouvementpourchriste.org</a></li>
+      <li><a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main Sticky Navigation -->
+<nav class="navbar" role="navigation" aria-label="Main Navigation">
+  <div class="container nav-container">
+    <a href="{% url 'home' %}" class="brand-logo" title="MPCR - Movement for Christ in Rwanda">
+      <img src="{% static 'images/logo.svg' %}" alt="MPCR Logo">
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+      <li><a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About Us</a></li>
+      <li><a href="{% url 'programs' %}" class="nav-link {% if request.resolver_match.url_name == 'programs' %}active{% endif %}">Our Programs</a></li>
+      <li><a href="{% url 'gallery' %}" class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact Us</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-cta-btn"><i class="fas fa-paper-plane"></i> Get in Touch</a></li>
+    </ul>
+  </div>
+</nav>

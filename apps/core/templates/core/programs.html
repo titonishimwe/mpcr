@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Our Programs & Activities - Movement for Christ in Rwanda (MPCR){% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section style="background: linear-gradient(135deg, var(--primary-navy-dark), var(--primary-navy-light)); color: #fff; padding: 4.5rem 0 3.5rem;">
+  <div class="container">
+    <span class="section-badge" style="background: rgba(254, 243, 199, 0.2); color: var(--accent-gold-light);">Holistic Interventions</span>
+    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">Our Programs & Activities</h1>
+    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
+      Integrating spiritual ministry with tangible socio-economic initiatives: landscape restoration, vocational skills, agricultural cooperatives, health advocacy, and child protection.
+    </p>
+  </div>
+</section>
+
+<!-- Main Programs Section -->
+<section class="programs-section" style="background: #ffffff;">
+  <div class="container">
+    <!-- Category Filter Bar -->
+    <div class="filter-nav">
+      <a href="{% url 'programs' %}?category=all" class="filter-pill {% if selected_category == 'all' or not selected_category %}active{% endif %}">
+        All Programs
+      </a>
+      {% for cat_key, cat_label in categories %}
+        <a href="{% url 'programs' %}?category={{ cat_key }}" class="filter-pill {% if selected_category == cat_key %}active{% endif %}">
+          {{ cat_label }}
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- Programs Grid -->
+    <div class="programs-grid">
+      {% for program in programs %}
+        <article class="program-card">
+          <div class="program-img-wrapper">
+            {% if program.image %}
+              <img src="{{ program.image.url }}" alt="{{ program.title }}">
+            {% elif program.image_url %}
+              <img src="{{ program.image_url }}" alt="{{ program.title }}">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="{{ program.title }}">
+            {% endif %}
+            <span class="program-category-pill">{{ program.get_category_display }}</span>
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">{{ program.title }}</h3>
+            <p class="program-summary" style="margin-bottom: 1rem; color: var(--text-main); font-weight: 500;">
+              {{ program.summary }}
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+              {{ program.description }}
+            </p>
+            <div class="program-meta">
+              <div class="program-meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span><strong>Coverage:</strong> {{ program.location }}</span>
+              </div>
+              <div class="program-meta-item">
+                <i class="fas fa-user-friends"></i>
+                <span><strong>Target Groups:</strong> {{ program.target_beneficiaries }}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 0;">
+          <p style="color: var(--text-muted); font-size: 1.1rem;">No programs found under this category.</p>
+          <a href="{% url 'programs' %}" class="btn btn-outline" style="margin-top: 1rem;">View All Programs</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Methodological Strategies & Target Groups -->
+<section style="padding: 5rem 0; background: var(--bg-main);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Implementation Framework</span>
+      <h2 class="section-title">Strategies & Target Beneficiaries</h2>
+      <p class="section-subtitle">
+        How MPCR drives sustainable grassroots mobilization and lasting community ownership.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+      <div style="background: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <i class="fas fa-cogs" style="color: var(--accent-green);"></i> Core Delivery Strategies
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-muted); font-size: 0.95rem;">
+          <li><i class="fas fa-film" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Christian Cinema & Road Shows:</strong> Mobile open-air screenings conveying gospel truths and public health messages.</li>
+          <li><i class="fas fa-bullhorn" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Evangelization Campaigns:</strong> Intensive community preaching, revival seminars, and youth fellowship rallies.</li>
+          <li><i class="fas fa-hands-helping" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Lobby & Advocacy:</strong> Defending the rights of women, child protection, and land restoration compliance.</li>
+          <li><i class="fas fa-chalkboard-teacher" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Capacity Building:</strong> Training Child Protection Committees (CPCs), gender counselors, and farmer facilitators.</li>
+          <li><i class="fas fa-seedling" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Decentralized Nurseries:</strong> Producing quality agroforestry and fruit seedlings directly within intervention sectors.</li>
+        </ul>
+      </div>
+
+      <div style="background: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <i class="fas fa-users" style="color: var(--accent-green);"></i> Priority Target Beneficiaries
+        </h3>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-muted); font-size: 0.95rem;">
+          <li><i class="fas fa-church" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Churches & Congregations:</strong> Equipping pastors, Sunday school teachers, and faith youth leaders.</li>
+          <li><i class="fas fa-child" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Children & University Students:</strong> Fostering child protection, scholarships, and Christian values.</li>
+          <li><i class="fas fa-female" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Women & Widows:</strong> Income-generating cooperatives, livestock incentives, and cookstoves.</li>
+          <li><i class="fas fa-user-shield" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Prisoners, Refugees & Informal Couples:</strong> Pastoral reconciliation, counseling, and social reintegration.</li>
+          <li><i class="fas fa-tractor" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Smallholder Farmers & Cooperatives:</strong> Training champion farmers in tree maintenance, soil care, and agroforestry.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Future Prospects & Strategic Roadmap (2026 - 2032) -->
+<section style="padding: 5rem 0; background: #ffffff;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Visionary Roadmap</span>
+      <h2 class="section-title">Strategic Prospects (2026 – 2032)</h2>
+      <p class="section-subtitle">
+        Ambitious milestones established by MPCR to scale impact across all provinces of Rwanda.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-user-graduate" style="color: var(--accent-green);"></i> 20,000 University Students</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Mobilizing youth across all Rwandan tertiary institutions for Christian leadership, ethical development, and self-reliance.</p>
+      </div>
+
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-shield-alt" style="color: var(--accent-green);"></i> 25,000 Youth in Child Rights</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Empowering youth ambassadors to defend child rights, curb school dropouts, and eradicate all forms of gender-based violence.</p>
+      </div>
+
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-users-cog" style="color: var(--accent-green);"></i> 50 Vulnerable Cooperatives</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Supporting 50 community cooperatives for poverty eradication, household food security, and rural savings (Ibimina).</p>
+      </div>
+
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-mountain" style="color: var(--accent-green);"></i> Rutsiro FLR Multi-Year Project</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Comprehensive land restoration and agroforestry across Rutsiro District in Western Province (January 2026 to March 2032).</p>
+      </div>
+
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-broadcast-tower" style="color: var(--accent-green);"></i> Community Radio & Media</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Establishing dedicated gospel radio and TV broadcasting for nationwide evangelism, civic debate, and family counseling.</p>
+      </div>
+
+      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
+        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-city" style="color: var(--accent-green);"></i> National Headquarters Construction</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Building a permanent administrative headquarters, theological library, and conference complex in Kigali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

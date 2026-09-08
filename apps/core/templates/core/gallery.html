@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Activity & Project Gallery - Movement for Christ in Rwanda (MPCR){% endblock %}
+
+{% block content %}
+<!-- Page Header Banner -->
+<section style="background: linear-gradient(135deg, var(--primary-navy-dark), var(--primary-navy-light)); color: #fff; padding: 4.5rem 0 3.5rem;">
+  <div class="container">
+    <span class="section-badge" style="background: rgba(254, 243, 199, 0.2); color: var(--accent-gold-light);">Visual Chronicle</span>
+    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">Project & Activity Gallery</h1>
+    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
+      Capturing real field milestones: tree nursery seedlings, agroforestry croplands, livestock awards, higher education graduations, and healthcare outreaches across Rwanda.
+    </p>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section" style="background: #ffffff;">
+  <div class="container">
+    <!-- Category Filter Bar -->
+    <div class="filter-nav">
+      <a href="{% url 'gallery' %}?category=all" class="filter-pill {% if selected_category == 'all' or not selected_category %}active{% endif %}">
+        All Photos
+      </a>
+      {% for cat_key, cat_label in categories %}
+        <a href="{% url 'gallery' %}?category={{ cat_key }}" class="filter-pill {% if selected_category == cat_key %}active{% endif %}">
+          {{ cat_label }}
+        </a>
+      {% endfor %}
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      {% for photo in photos %}
+        <div class="gallery-item"
+             data-img="{% if photo.image %}{{ photo.image.url }}{% else %}{{ photo.image_url }}{% endif %}"
+             data-title="{{ photo.title }}"
+             data-caption="{{ photo.caption }}"
+             data-location="{{ photo.location }}">
+          {% if photo.image %}
+            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+          {% else %}
+            <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy">
+          {% endif %}
+          <div class="gallery-overlay">
+            <h4 class="gallery-title">{{ photo.title }}</h4>
+            <p class="gallery-caption">{{ photo.caption }}</p>
+            {% if photo.location %}
+              <span class="gallery-location">
+                <i class="fas fa-map-marker-alt"></i> {{ photo.location }} • {{ photo.date_taken }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
+          <p style="color: var(--text-muted); font-size: 1.1rem;">No photos available in this category at the moment.</p>
+          <a href="{% url 'gallery' %}" class="btn btn-outline" style="margin-top: 1rem;">View All Photos</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal Container -->
+<div class="modal-overlay" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose" aria-label="Close photo modal">&times;</button>
+    <img src="" alt="Expanded View" id="modalImage">
+    <div class="modal-details">
+      <h3 id="modalTitle"></h3>
+      <p id="modalCaption"></p>
+      <div id="modalLocation" style="color: var(--accent-gold); font-size: 0.85rem; font-weight: 700; margin-top: 0.5rem;"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

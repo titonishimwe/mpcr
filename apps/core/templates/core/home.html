@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Movement for Christ in Rwanda (MPCR){% endblock %}
+
+{% block content %}
+<!-- ========================================================================
+     Hero Section
+     ======================================================================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge-tag">
+          <i class="fas fa-cross"></i>
+          <span>FAITH • COMMUNITY • SUSTAINABLE TRANSFORMATION</span>
+        </div>
+        <h1 class="hero-title">
+          Preaching Christ, Empowering Lives & <span>Restoring Landscapes</span>
+        </h1>
+        <p class="hero-tagline">
+          "Roho nzima itura mu mubiri muzima" — A healthy spirit lives in a healthy body.
+        </p>
+        <p class="hero-text">
+          Movement for Christ in Rwanda (MPCR) is a legally registered Christian non-governmental organization committed to holistic evangelism, sustainable agriculture, child protection, community health, and forest landscape restoration across Rwanda.
+        </p>
+        <div class="hero-actions">
+          <a href="{% url 'programs' %}" class="btn btn-primary">
+            <i class="fas fa-seedling"></i> Explore Our Programs
+          </a>
+          <a href="{% url 'contact' %}" class="btn btn-white">
+            <i class="fas fa-envelope"></i> Contact Us
+          </a>
+          <a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Card Highlight -->
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-icon">
+            <i class="fas fa-bible"></i>
+          </div>
+          <div>
+            <h3>Our Foundation</h3>
+            <span style="color: var(--accent-gold-light); font-size: 0.85rem; font-weight: 700;">John 3:16 / Jean 3:16</span>
+          </div>
+        </div>
+        <p class="hero-verse-quote">
+          "That whoever believes in HIM should not perish but have eternal life."
+          <br>
+          <small style="color: #CBD5E1;"><em>Afin que tout homme qui croit en LUI ne périsse pas mais ait la vie éternelle: CHRIST.</em></small>
+        </p>
+        <ul class="hero-features-list">
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span><strong>Accredited NGO:</strong> Legal Compliance No. 166/2023 under Law No 06/2012</span>
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span><strong>FLR Leader:</strong> Restoring 105+ ha in Gatsibo with TerraFund & WRI</span>
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span><strong>Church Alliance:</strong> Partnering with over 25 churches nationwide</span>
+          </li>
+          <li>
+            <i class="fas fa-check-circle"></i>
+            <span><strong>Headquarters:</strong> Nyamirambo Sector, Nyarugenge District, Kigali City</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Impact Statistics Bar
+     ======================================================================== -->
+<section class="stats-section">
+  <div class="stats-grid">
+    {% for stat in stats %}
+      <div class="stat-item">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+        <div class="stat-desc">{{ stat.description }}</div>
+      </div>
+    {% empty %}
+      <div class="stat-item"><div class="stat-value">105+</div><div class="stat-label">Hectares Restored</div></div>
+      <div class="stat-item"><div class="stat-value">28,800+</div><div class="stat-label">Tree Seedlings</div></div>
+      <div class="stat-item"><div class="stat-value">150+</div><div class="stat-label">Champion Farmers</div></div>
+      <div class="stat-item"><div class="stat-value">240+</div><div class="stat-label">Livestock Provided</div></div>
+      <div class="stat-item"><div class="stat-value">25+</div><div class="stat-label">Partner Churches</div></div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ========================================================================
+     About & Core Values Preview
+     ======================================================================== -->
+<section class="about-preview">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-narrative">
+        <span class="section-badge">Who We Are</span>
+        <h2>Guided by Christian Faith, Dedicated to People and Planet</h2>
+        <p>
+          Founded in Kinyinya, Gasabo District, MPCR began with a divine vision to unite evangelism with concrete community development. We believe that true spiritual transformation flourishes when human dignity, food security, environmental stewardship, and physical health are restored together.
+        </p>
+        <p>
+          Our field interventions span Nyarugenge, Gasabo, and Kicukiro in Kigali City; Gatsibo in the Eastern Province; Rusizi, Ngororero, and Rutsiro in the Western Province; and Nyanza and Kamonyi in the Southern Province.
+        </p>
+
+        <div class="about-highlights-grid">
+          <div class="highlight-box">
+            <h4><i class="fas fa-eye" style="color: var(--accent-green);"></i> Our Vision</h4>
+            <p>Leading positive change by preaching the Gospel, promoting good living, economic resilience, and environmental sustainability.</p>
+          </div>
+          <div class="highlight-box">
+            <h4><i class="fas fa-bullseye" style="color: var(--accent-gold);"></i> Our Mission</h4>
+            <p>To make Christ known and transform lives through evangelism, community-led initiatives, and socio-economic empowerment.</p>
+          </div>
+        </div>
+
+        <a href="{% url 'about' %}" class="btn btn-secondary">
+          <i class="fas fa-info-circle"></i> Learn More About Our Organization
+        </a>
+      </div>
+
+      <div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-heart"></i></div>
+            <h3>Gukunda Imana (Faith & Reverence)</h3>
+            <p>Deep devotion, worship, and obedience to God as the foundation of all righteous actions and community healing.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-hands-helping"></i></div>
+            <h3>Impuhwe (Compassion)</h3>
+            <p>Christ-like empathy reaching the vulnerable, orphans, widows, refugees, and impoverished smallholder families.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-balance-scale"></i></div>
+            <h3>Ubunyangamugayo (Integrity)</h3>
+            <p>Accountable governance, ethical leadership, and transparent management in all partner funds and resources.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-leaf"></i></div>
+            <h3>Iterambere Rirambye (Sustainability)</h3>
+            <p>Long-term environmental care and economic resilience ensuring future generations inherit a thriving land.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Featured Programs / Activities
+     ======================================================================== -->
+<section class="programs-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">What We Do</span>
+      <h2 class="section-title">Our Key Programs & Activities</h2>
+      <p class="section-subtitle">
+        Combining spiritual nourishment with impactful social, environmental, and economic initiatives across Rwandan communities.
+      </p>
+    </div>
+
+    <div class="programs-grid">
+      {% for program in featured_programs %}
+        <article class="program-card">
+          <div class="program-img-wrapper">
+            {% if program.image %}
+              <img src="{{ program.image.url }}" alt="{{ program.title }}">
+            {% elif program.image_url %}
+              <img src="{{ program.image_url }}" alt="{{ program.title }}">
+            {% else %}
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="{{ program.title }}">
+            {% endif %}
+            <span class="program-category-pill">{{ program.get_category_display }}</span>
+          </div>
+          <div class="program-body">
+            <h3 class="program-title">{{ program.title }}</h3>
+            <p class="program-summary">{{ program.summary }}</p>
+            <div class="program-meta">
+              <div class="program-meta-item">
+                <i class="fas fa-map-pin"></i>
+                <span>{{ program.location }}</span>
+              </div>
+              <div class="program-meta-item">
+                <i class="fas fa-user-friends"></i>
+                <span>{{ program.target_beneficiaries }}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="{% url 'programs' %}" class="btn btn-primary">
+        <i class="fas fa-th-list"></i> View All Detailed Programs & Activities
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Testimonials / Beneficiary Stories
+     ======================================================================== -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Voices from the Field</span>
+      <h2 class="section-title">Testimonials & Community Impact</h2>
+      <p class="section-subtitle">
+        Real stories from farmers, community leaders, and local government partners whose lives and farmlands have been transformed.
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      {% for testimonial in testimonials %}
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+          <div class="testimonial-author">
+            {% if testimonial.image_url %}
+              <img src="{{ testimonial.image_url }}" alt="{{ testimonial.author }}" class="author-avatar">
+            {% else %}
+              <div class="author-avatar" style="background: var(--primary-navy); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                {{ testimonial.author|slice:":1" }}
+              </div>
+            {% endif %}
+            <div class="author-info">
+              <h4>{{ testimonial.author }}</h4>
+              <p>{{ testimonial.role }} • {{ testimonial.location }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Gallery Preview Section
+     ======================================================================== -->
+<section class="gallery-section" style="background: #ffffff;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Visual Impact</span>
+      <h2 class="section-title">Activities & Field Photos</h2>
+      <p class="section-subtitle">
+        Glimpses into our tree nurseries, cropland agroforestry, livestock awards, educational seminars, and community mobilizations.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      {% for photo in preview_gallery %}
+        <div class="gallery-item"
+             data-img="{% if photo.image %}{{ photo.image.url }}{% else %}{{ photo.image_url }}{% endif %}"
+             data-title="{{ photo.title }}"
+             data-caption="{{ photo.caption }}"
+             data-location="{{ photo.location }}">
+          {% if photo.image %}
+            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+          {% else %}
+            <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy">
+          {% endif %}
+          <div class="gallery-overlay">
+            <h4 class="gallery-title">{{ photo.title }}</h4>
+            <p class="gallery-caption">{{ photo.caption|truncatewords:14 }}</p>
+            {% if photo.location %}
+              <span class="gallery-location"><i class="fas fa-map-marker-alt"></i> {{ photo.location }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <a href="{% url 'gallery' %}" class="btn btn-outline">
+        <i class="fas fa-images"></i> View Complete Photo Gallery
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Strategic Partners Section
+     ======================================================================== -->
+<section class="partners-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Alliances & Cooperation</span>
+      <h2 class="section-title">Our Strategic Partners</h2>
+      <p class="section-subtitle">
+        We collaborate with national ministries, international donors, technical research bodies, and Christian institutions.
+      </p>
+    </div>
+
+    <div class="partners-grid">
+      {% for partner in partners %}
+        <div class="partner-card">
+          <span class="partner-name">{{ partner.name }}</span>
+          <span class="partner-category">{{ partner.category }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     Call to Action Banner
+     ======================================================================== -->
+<section style="background: linear-gradient(135deg, var(--primary-navy), #15803D); color: #fff; padding: 5rem 0; text-align: center;">
+  <div class="container">
+    <h2 style="font-size: 2.35rem; font-weight: 900; margin-bottom: 1rem;">Partner With Us in Transforming Rwanda</h2>
+    <p style="font-size: 1.15rem; max-width: 680px; margin: 0 auto 2rem; color: #E2E8F0;">
+      Whether you represent a church community, donor institution, development cooperative, or volunteer group, your collaboration makes a lasting impact.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
+      <a href="{% url 'contact' %}" class="btn btn-white">
+        <i class="fas fa-paper-plane"></i> Send Us an Inquiry
+      </a>
+      <a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal Container -->
+<div class="modal-overlay" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose" aria-label="Close photo modal">&times;</button>
+    <img src="" alt="Expanded View" id="modalImage">
+    <div class="modal-details">
+      <h3 id="modalTitle"></h3>
+      <p id="modalCaption"></p>
+      <div id="modalLocation" style="color: var(--accent-gold); font-size: 0.85rem; font-weight: 700; margin-top: 0.5rem;"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
