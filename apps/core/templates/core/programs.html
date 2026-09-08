@@ -5,70 +5,57 @@
 
 {% block content %}
 <!-- Page Header Banner -->
-<section style="background: linear-gradient(135deg, var(--primary-navy-dark), var(--primary-navy-light)); color: #fff; padding: 4.5rem 0 3.5rem;">
+<section class="programs-page-banner">
   <div class="container">
-    <span class="section-badge" style="background: rgba(254, 243, 199, 0.2); color: var(--accent-gold-light);">Holistic Interventions</span>
-    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">Our Programs & Activities</h1>
-    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
-      Integrating spiritual ministry with tangible socio-economic initiatives: landscape restoration, vocational skills, agricultural cooperatives, health advocacy, and child protection.
-    </p>
+    <h1>Our Programs</h1>
+    <p>Comprehensive Interventions Empowering Rwandan Communities in Spirit, Mind, and Livelihood</p>
+    <nav class="programs-breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span>&gt;</span>
+      <span>Programs</span>
+    </nav>
   </div>
 </section>
 
-<!-- Main Programs Section -->
-<section class="programs-section" style="background: #ffffff;">
+<!-- Six Pillars -->
+<section class="pillars-section">
   <div class="container">
-    <!-- Category Filter Bar -->
-    <div class="filter-nav">
-      <a href="{% url 'programs' %}?category=all" class="filter-pill {% if selected_category == 'all' or not selected_category %}active{% endif %}">
-        All Programs
-      </a>
-      {% for cat_key, cat_label in categories %}
-        <a href="{% url 'programs' %}?category={{ cat_key }}" class="filter-pill {% if selected_category == cat_key %}active{% endif %}">
-          {{ cat_label }}
-        </a>
-      {% endfor %}
+    <div class="section-header">
+      <span class="section-badge">Integrated Action</span>
+      <h2 class="section-title">Community Transformation</h2>
+      <p class="section-subtitle">
+        MPCR designs and implements initiatives that meet urgent grassroots needs while building long-term community self-reliance.
+      </p>
     </div>
 
-    <!-- Programs Grid -->
-    <div class="programs-grid">
+    <div class="pillar-list">
       {% for program in programs %}
-        <article class="program-card">
-          <div class="program-img-wrapper">
+        <article class="pillar-card">
+          <div class="pillar-media">
             {% if program.image %}
               <img src="{{ program.image.url }}" alt="{{ program.title }}">
             {% elif program.image_url %}
               <img src="{{ program.image_url }}" alt="{{ program.title }}">
             {% else %}
-              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="{{ program.title }}">
+              <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=900&q=80" alt="{{ program.title }}">
             {% endif %}
-            <span class="program-category-pill">{{ program.get_category_display }}</span>
           </div>
-          <div class="program-body">
-            <h3 class="program-title">{{ program.title }}</h3>
-            <p class="program-summary" style="margin-bottom: 1rem; color: var(--text-main); font-weight: 500;">
-              {{ program.summary }}
-            </p>
-            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
-              {{ program.description }}
-            </p>
-            <div class="program-meta">
-              <div class="program-meta-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span><strong>Coverage:</strong> {{ program.location }}</span>
-              </div>
-              <div class="program-meta-item">
-                <i class="fas fa-user-friends"></i>
-                <span><strong>Target Groups:</strong> {{ program.target_beneficiaries }}</span>
-              </div>
-            </div>
+          <div class="pillar-body">
+            <h3>{{ program.title }}</h3>
+            <p>{{ program.summary }}</p>
+            <h4>Core Activities:</h4>
+            <ul>
+              {% for point in program.activity_points %}
+                <li>{{ point }}</li>
+              {% empty %}
+                <li>{{ program.description }}</li>
+              {% endfor %}
+            </ul>
+            <a href="{% url 'contact' %}" class="pillar-partner-btn">Partner on this Program</a>
           </div>
         </article>
       {% empty %}
-        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 0;">
-          <p style="color: var(--text-muted); font-size: 1.1rem;">No programs found under this category.</p>
-          <a href="{% url 'programs' %}" class="btn btn-outline" style="margin-top: 1rem;">View All Programs</a>
-        </div>
+        <p class="section-subtitle">No programs found under this category.</p>
       {% endfor %}
     </div>
   </div>
@@ -115,46 +102,80 @@
   </div>
 </section>
 
-<!-- Future Prospects & Strategic Roadmap (2026 - 2032) -->
-<section style="padding: 5rem 0; background: #ffffff;">
+<!-- Prospect -->
+<section class="prospect-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Visionary Roadmap</span>
-      <h2 class="section-title">Strategic Prospects (2026 – 2032)</h2>
+      <span class="section-badge">Prospect</span>
+      <h2 class="section-title">By the End of 2026</h2>
       <p class="section-subtitle">
-        Ambitious milestones established by MPCR to scale impact across all provinces of Rwanda.
+        MPCR will become a major participant in Rwanda in accomplishing its mission and achieving its objectives. By the end of 2026 it will have carried out the following work.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-user-graduate" style="color: var(--accent-green);"></i> 20,000 University Students</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Mobilizing youth across all Rwandan tertiary institutions for Christian leadership, ethical development, and self-reliance.</p>
+    <div class="prospect-groups">
+      <div>
+        <h3>Youth, students, and child rights</h3>
+        <ul>
+          <li>Mobilizing 20,000 students of all universities in Rwanda for self-reliance, leadership development, child rights, and improved living conditions, based on Christianity and evangelization.</li>
+          <li>Training 25,000 Rwandan youth on child rights.</li>
+          <li>Creating Child Protection Committees and grouping vulnerable groups into cooperatives.</li>
+          <li>Training beneficiaries on violence and how to conduct advocacy and lobby.</li>
+          <li>Combating school dropout within a human rights framework.</li>
+          <li>Promoting community debate within a human rights framework.</li>
+        </ul>
       </div>
 
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-shield-alt" style="color: var(--accent-green);"></i> 25,000 Youth in Child Rights</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Empowering youth ambassadors to defend child rights, curb school dropouts, and eradicate all forms of gender-based violence.</p>
+      <div>
+        <h3>Livelihoods and household support</h3>
+        <ul>
+          <li>Supporting 50 vulnerable cooperatives for poverty reduction and food balance.</li>
+          <li>Promoting community financial saving in rural areas (Ibimina).</li>
+          <li>Women Economic Empowerment Project.</li>
+          <li>Youth Skills and Employment Project.</li>
+          <li>Vulnerable Household Graduation Project.</li>
+          <li>Community Savings and Entrepreneurship Project.</li>
+          <li>Agricultural Livelihoods and Food Security Project.</li>
+          <li>Green and Social Enterprise Development Project.</li>
+        </ul>
       </div>
 
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-users-cog" style="color: var(--accent-green);"></i> 50 Vulnerable Cooperatives</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Supporting 50 community cooperatives for poverty eradication, household food security, and rural savings (Ibimina).</p>
+      <div>
+        <h3>Health, climate, and community well-being</h3>
+        <ul>
+          <li>Combating HIV among youth and in all communities.</li>
+          <li>Combating disease in all communities, especially among youth.</li>
+          <li>Combating climate change.</li>
+          <li>Combating malnutrition in children.</li>
+        </ul>
       </div>
 
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-mountain" style="color: var(--accent-green);"></i> Rutsiro FLR Multi-Year Project</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Comprehensive land restoration and agroforestry across Rutsiro District in Western Province (January 2026 to March 2032).</p>
+      <div>
+        <h3>Education, media, and headquarters</h3>
+        <ul>
+          <li>Promoting Sunday school centers.</li>
+          <li>Creating a secondary school.</li>
+          <li>Creating a university institution.</li>
+          <li>Creating community radio and television.</li>
+          <li>Building our headquarters.</li>
+        </ul>
       </div>
 
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-broadcast-tower" style="color: var(--accent-green);"></i> Community Radio & Media</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Establishing dedicated gospel radio and TV broadcasting for nationwide evangelism, civic debate, and family counseling.</p>
-      </div>
-
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem; border-top: 4px solid var(--accent-green);">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-city" style="color: var(--accent-green);"></i> National Headquarters Construction</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Building a permanent administrative headquarters, theological library, and conference complex in Kigali.</p>
+      <div class="prospect-span">
+        <h3>Church, leadership, and ministry</h3>
+        <ul class="prospect-two">
+          <li>Training pastors and church leaders.</li>
+          <li>Supporting Bible schools and theological institutions.</li>
+          <li>Developing Christian leadership and discipleship programs.</li>
+          <li>Providing teaching materials and resources for churches.</li>
+          <li>Partnering with Baptist conventions and ministries around the world.</li>
+          <li>Strengthening local churches through biblical education.</li>
+          <li>Pastor and church leader training.</li>
+          <li>Bible and theological education.</li>
+          <li>Church planting initiatives.</li>
+          <li>Christian leadership development.</li>
+          <li>Ministry resource development.</li>
+        </ul>
       </div>
     </div>
   </div>

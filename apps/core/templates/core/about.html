@@ -5,9 +5,9 @@
 
 {% block content %}
 <!-- Page Header Banner -->
-<section style="background: linear-gradient(135deg, var(--primary-navy-dark), var(--primary-navy-light)); color: #fff; padding: 4.5rem 0 3.5rem;">
+<section class="page-banner">
   <div class="container">
-    <span class="section-badge" style="background: rgba(254, 243, 199, 0.2); color: var(--accent-gold-light);">Our History & Identity</span>
+    <span class="section-badge">Our History & Identity</span>
     <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">About MPCR</h1>
     <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
       Mouvement Pour Christ au Rwanda (Movement for Christ in Rwanda) is a religious non-governmental organization dedicated to preaching the Gospel and advancing socio-economic transformation.
@@ -70,7 +70,7 @@
 <section style="padding: 5rem 0; background: var(--bg-main);">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Pillars of MPCR</span>
+      <span class="section-badge">What We Stand For</span>
       <h2 class="section-title">Vision, Mission & Guiding Identity</h2>
       <p class="section-subtitle">
         Anchored in our guiding principle: <strong>"Roho nzima itura mu mubiri muzima"</strong> (A healthy spirit lives in a healthy body).
@@ -79,7 +79,7 @@
 
     <!-- Vision & Mission Side by Side -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
-      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; border-top: 5px solid var(--accent-green); box-shadow: var(--shadow-sm);">
+      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
           <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-green-soft); color: var(--accent-green); display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
             <i class="fas fa-eye"></i>
@@ -91,7 +91,7 @@
         </p>
       </div>
 
-      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; border-top: 5px solid var(--accent-gold); box-shadow: var(--shadow-sm);">
+      <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
           <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-gold-soft); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
             <i class="fas fa-bullseye"></i>
@@ -109,87 +109,67 @@
       <h3 style="font-size: 1.85rem; font-weight: 800; color: var(--primary-navy);">Our Core Values (Indangagaciro)</h3>
     </div>
 
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-praying-hands"></i></div>
-        <h3>Gukunda Imana no Kuyubaha</h3>
-        <p>Devoted love and reverent fear of God guiding every decision, stewardship practice, and interpersonal interaction.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-heart"></i></div>
-        <h3>Urukundo n'Impuhwe</h3>
-        <p>Unconditional Christian love and compassion, reaching out especially to the most vulnerable, widows, orphans, and prisoners.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
-        <h3>Ubunyangamugayo</h3>
-        <p>Uncompromising honesty, moral uprightness, and trustworthy financial and institutional stewardship.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-sun"></i></div>
-        <h3>Gukorera mu Mucyo</h3>
-        <p>Transparency and open accountability toward beneficiaries, government authorities, donor partners, and churches.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-users"></i></div>
-        <h3>Ubumwe n'Ubufatanye</h3>
-        <p>Unity, mutual respect, teamwork, and strong collaborative alliances across communities and civil society organizations.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon"><i class="fas fa-seedling"></i></div>
-        <h3>Iterambere Rirambye</h3>
-        <p>Sustainable development integrating environmental restoration with economic resilience for enduring community prosperity.</p>
+    <div class="values-panel">
+      <div class="values-grid">
+        <div class="values-col">
+          <article class="value-card">
+            <h3>Gukunda Imana no Kuyubaha</h3>
+            <p>Devoted love and reverent fear of God guiding every decision, stewardship practice, and interpersonal interaction.</p>
+          </article>
+          <article class="value-card">
+            <h3>Gukorera mu Mucyo</h3>
+            <p>Transparency and open accountability toward beneficiaries, government authorities, donor partners, and churches.</p>
+          </article>
+        </div>
+        <div class="values-col values-col-center">
+          <article class="value-card">
+            <h3>Urukundo n'Impuhwe</h3>
+            <p>Unconditional Christian love and compassion, reaching out especially to the most vulnerable, widows, orphans, and prisoners.</p>
+          </article>
+          <article class="value-card">
+            <h3>Ubumwe n'Ubufatanye</h3>
+            <p>Unity, mutual respect, teamwork, and strong collaborative alliances across communities and civil society organizations.</p>
+          </article>
+        </div>
+        <div class="values-col">
+          <article class="value-card">
+            <h3>Ubunyangamugayo</h3>
+            <p>Uncompromising honesty, moral uprightness, and trustworthy financial and institutional stewardship.</p>
+          </article>
+          <article class="value-card">
+            <h3>Iterambere Rirambye</h3>
+            <p>Sustainable development integrating environmental restoration with economic resilience for enduring community prosperity.</p>
+          </article>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Organizational Governance & Structure -->
+<!-- Objectives -->
 <section style="padding: 5rem 0; background: #ffffff;">
   <div class="container">
-    <div class="section-header">
-      <span class="section-badge">Leadership & Administration</span>
-      <h2 class="section-title">Organs & Governance Structure</h2>
-      <p class="section-subtitle">
-        MPCR maintains a clear, accountable, and transparent administrative structure to ensure rigorous oversight.
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.75rem; margin-bottom: 3.5rem;">
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem;">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-users-cog" style="color: var(--accent-green);"></i> 1. General Assembly</h4>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">The supreme decision-making and policy formulation body of MPCR, representing general membership and organizational vision.</p>
-      </div>
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem;">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-clipboard-check" style="color: var(--accent-green);"></i> 2. Executive Committee</h4>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Responsible for strategic leadership, operational oversight, program approvals, and performance agreements.</p>
-      </div>
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem;">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-balance-scale" style="color: var(--accent-green);"></i> 3. Audit Council</h4>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Independent internal audit and compliance organ ensuring fiscal discipline, regulatory adherence, and integrity.</p>
-      </div>
-      <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.75rem;">
-        <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem;"><i class="fas fa-sitemap" style="color: var(--accent-green);"></i> 4. Executive Secretariat</h4>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Headed by the Legal Representative, directing daily program executions across 10 specialized functional departments.</p>
-      </div>
-    </div>
-
-    <!-- 10 Specialized Departments -->
     <div style="background: var(--bg-main); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem;">
       <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.5rem; text-align: center;">
-        Executive Secretariat Functional Departments
+        Objectives
       </h3>
+      <div style="background: #fff; padding: 1.25rem 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 0.5rem;">General Objective</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">
+          Promoting evangelism based on actions that address real problems of the people, in their well-being, economy and sustainable development.
+        </p>
+      </div>
+      <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 1rem; text-align: center;">Specific Objectives</h4>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-seedling" style="color: var(--accent-green);"></i> Development Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-bible" style="color: var(--accent-gold);"></i> Evangelization Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-hands" style="color: var(--accent-green);"></i> Social Affairs Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-graduation-cap" style="color: var(--accent-gold);"></i> Education Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-female" style="color: var(--accent-green);"></i> Gender Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-user-friends" style="color: var(--accent-gold);"></i> Youth Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-balance-scale" style="color: var(--accent-green);"></i> Human Rights Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-bullhorn" style="color: var(--accent-gold);"></i> Communication Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-heartbeat" style="color: var(--accent-green);"></i> Health Dept.</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: var(--primary-navy);"><i class="fas fa-tree" style="color: var(--accent-green);"></i> Environment & Research</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To evangelize youth and children</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To integrate children and youth in epidemic diseases eradication</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To fight against all forms of violence against children and women</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote environment</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote vocational trainings and cooperatives</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote child rights</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To reinforce income generating projects</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote care and social events</div>
+        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To combat HIV in communities</div>
       </div>
     </div>
   </div>

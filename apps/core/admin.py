@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Program, GalleryImage, ContactMessage, ImpactStat, Partner, Testimonial
+from .models import Program, GalleryImage, ContactMessage, ImpactStat, Partner, TeamMember, Testimonial
 
 # Customize Admin Site Branding
 admin.site.site_header = "MPCR Administration - Movement for Christ in Rwanda"
@@ -56,6 +56,15 @@ class ContactMessageAdmin(admin.ModelAdmin):
 class ImpactStatAdmin(admin.ModelAdmin):
     list_display = ["value", "label", "description", "icon", "order"]
     list_editable = ["order"]
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ["name", "position", "phone", "email", "order", "is_active"]
+    list_filter = ["is_active"]
+    search_fields = ["name", "position", "phone", "email"]
+    list_editable = ["order", "is_active"]
+    fields = ["name", "position", "phone", "email", "photo", "order", "is_active"]
 
 
 @admin.register(Partner)

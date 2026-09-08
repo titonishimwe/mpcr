@@ -1,24 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from .models import Program, GalleryImage, ImpactStat, Partner, Testimonial
+from .models import Program, GalleryImage, ImpactStat, Partner, TeamMember
 from .forms import ContactForm
 
 
 def home(request):
     featured_programs = Program.objects.filter(is_featured=True)[:6]
-    stats = ImpactStat.objects.all()[:6]
-    testimonials = Testimonial.objects.all()[:3]
-    partners = Partner.objects.all()[:10]
     preview_gallery = GalleryImage.objects.filter(is_featured=True)[:6]
+    team_members = TeamMember.objects.filter(is_active=True)
 
     context = {
         "page_title": "Home - Movement for Christ in Rwanda (MPCR)",
         "featured_programs": featured_programs,
-        "stats": stats,
-        "testimonials": testimonials,
-        "partners": partners,
         "preview_gallery": preview_gallery,
+        "team_members": team_members,
     }
     return render(request, "core/home.html", context)
 

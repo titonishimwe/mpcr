@@ -40,6 +40,10 @@ class Program(models.Model):
     def __str__(self):
         return self.title
 
+    def activity_points(self):
+        sentences = [part.strip() for part in self.description.replace(";", ".").split(".") if part.strip()]
+        return sentences[:4]
+
 
 class GalleryImage(models.Model):
     CATEGORY_CHOICES = [
@@ -119,6 +123,33 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=150)
+    position = models.CharField(max_length=200)
+    phone = models.CharField(max_length=40, blank=True)
+    email = models.EmailField(blank=True)
+    photo = models.ImageField(upload_to="team/", blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "name"]
+        verbose_name = "Team Member"
+        verbose_name_plural = "Team Members"
+
+    def __str__(self):
+        return f"{self.name} — {self.position}"
+
+    @property
+    def initials(self):
+        parts = [part for part in self.name.replace(".", " ").split() if part.isalpha()]
+        if not parts:
+            return "MP"
+        if len(parts) == 1:
+            return parts[0][:2].upper()
+        return (parts[0][0] + parts[-1][0]).upper()
 
 
 class Testimonial(models.Model):

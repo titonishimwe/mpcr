@@ -11,109 +11,89 @@ class Command(BaseCommand):
         # 1. Programs & Activities
         programs_data = [
             {
-                "title": "Forest Landscape Restoration (FLR) & Agroforestry",
+                "title": "Strengthening Climate Change Adaptation Capacity for Poor and Vulnerable Households in Gatsibo District",
                 "category": "flr",
-                "summary": "Restoring degraded agricultural croplands and woodlots across Gatsibo and Rutsiro districts to build climate resilience and sustainable rural livelihoods.",
+                "summary": "Building the capacity of poor and vulnerable households in Gatsibo District to adapt to climate change and protect their livelihoods.",
                 "description": (
-                    "MPCR actively implements Forest Landscape Restoration (FLR) projects in partnership with "
-                    "TerraFund for AFR100 and the World Resources Institute (WRI). In Gatsibo District (Kabarore Sector, "
-                    "Nyabikiri Cell), MPCR piloted the restoration of 105 hectares (100 ha cropland with Grevillea robusta "
-                    "and fruit trees; 5 ha woodlot into productive Eucalyptus plantation), producing 28,800 seedlings in a "
-                    "central nursery. Livelihood incentives including 50 goats and 100 improved cookstoves (ICS) were awarded "
-                    "to 150 champion farmers. In Rutsiro District (Western Province), MPCR is executing a multi-year agroforestry "
-                    "and land restoration program running from 2026 to 2032."
+                    "The project strengthens climate change adaptation among poor and vulnerable households in Gatsibo District. "
+                    "Households are supported to protect land, food, and income against climate shocks. "
+                    "Field work links restoration, livelihood support, and practical household resilience. "
+                    "The intervention is implemented with local communities in Gatsibo District."
                 ),
                 "icon": "tree",
-                "image_url": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Smallholder farmers, vulnerable rural households, women, youth",
-                "location": "Gatsibo District (Eastern Province) & Rutsiro District (Western Province)",
+                "image_url": "",
+                "target_beneficiaries": "Poor and vulnerable households",
+                "location": "Gatsibo District",
                 "is_featured": True,
                 "order": 1,
             },
             {
-                "title": "Evangelism, Biblical Training & Christian Leadership",
-                "category": "evangelism",
-                "summary": "Sharing the Gospel of Jesus Christ and strengthening local churches through biblical education, Sunday schools, and correspondence Bible training.",
+                "title": "Single Stream Funding (SSF/VIH) for HIV/AIDS in Nyanza District",
+                "category": "health",
+                "summary": "HIV/AIDS response in Nyanza District, financed by the Global Fund through Single Stream Funding (SSF/VIH).",
                 "description": (
-                    "Rooted in John 3:16, MPCR is committed to making Christ known across Rwanda. The organization mobilizes "
-                    "a network of over 25 churches, supports correspondence Bible school courses, and equips pastors and church "
-                    "workers with sound theological teaching materials. Through community road shows, Christian film screenings, "
-                    "and discipleship initiatives, MPCR nurtures faith, moral integrity, and social harmony."
+                    "Single Stream Funding (SSF/VIH) supports HIV/AIDS services in Nyanza District. "
+                    "The project is financed by the Global Fund. "
+                    "Activities strengthen community access to HIV/AIDS prevention and care. "
+                    "The work is implemented with local partners in Nyanza District."
                 ),
-                "icon": "book-open",
-                "image_url": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Local church congregations, pastors, youth, children, prisoners",
-                "location": "Kigali City, Eastern, Western, and Southern Provinces",
+                "icon": "heart",
+                "image_url": "",
+                "target_beneficiaries": "Communities affected by HIV/AIDS",
+                "location": "Nyanza District",
                 "is_featured": True,
                 "order": 2,
             },
             {
-                "title": "Child Protection & Women Economic Empowerment",
-                "category": "child_women",
-                "summary": "Protecting child rights, fighting gender-based violence, establishing Child Protection Committees (CPCs), and building economic capacity for vulnerable women.",
+                "title": "Professional Training in Carpentry, Gatsibo District",
+                "category": "education",
+                "summary": "Professional carpentry training in Gatsibo District under project 7F-01352.11.01, financed by the Embassy of Switzerland.",
                 "description": (
-                    "MPCR stands firm in defending the rights of children and vulnerable women. Through community advocacy and "
-                    "close collaboration with local authorities, the organization establishes and trains Child Protection Committees (CPCs). "
-                    "Our target is training 25,000 Rwandan youth on child rights and combating violence against women and children, "
-                    "while facilitating women's cooperatives with vocational skills and income-generating opportunities."
+                    "Project 7F-01352.11.01 provides professional training, specifically in carpentry, in Gatsibo District. "
+                    "The project is financed by the Embassy of Switzerland. "
+                    "Youth gain practical trade skills for employment and self-reliance. "
+                    "Training is delivered with local communities in Gatsibo District."
                 ),
-                "icon": "shield",
-                "image_url": "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Vulnerable children, women-headed households, widows, youth",
-                "location": "Nyanza, Kamonyi, Gasabo, and Gatsibo Districts",
+                "icon": "award",
+                "image_url": "",
+                "target_beneficiaries": "Youth in vocational training",
+                "location": "Gatsibo District",
                 "is_featured": True,
                 "order": 3,
             },
             {
-                "title": "Community Health, Nutrition & HIV Eradication",
+                "title": "Scaling Up Access to HIV/AIDS Prevention Services in Rwanda",
                 "category": "health",
-                "summary": "Promoting holistic health ('Roho nzima itura mu mubiri muzima'), epidemic disease prevention, maternal-child health, and HIV education.",
+                "summary": "Scaling up access to HIV/AIDS prevention services in Rwanda, financed by the Global Fund (R6 / VIII/R6).",
                 "description": (
-                    "In line with our founding vision that 'A healthy spirit lives in a healthy body', MPCR delivers health education "
-                    "in partnership with MINISANTE and the Global Fund. Field activities include HIV awareness campaigns (such as basic "
-                    "HIV prevention education in Muyira Center, Nyanza District), family planning and reproductive health coaching, "
-                    "and nutrition enhancement through backyard fruit tree cultivation."
+                    "The project scales up access to HIV/AIDS prevention services in Rwanda. "
+                    "It is financed by the Global Fund under grant R6 / VIII/R6. "
+                    "Community outreach reaches youth and households with prevention education. "
+                    "The focus is prevention and wider access to HIV/AIDS services."
                 ),
                 "icon": "heart",
-                "image_url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Rural families, youth, expectant mothers, people living with HIV",
-                "location": "Nyanza, Kamonyi, and Nyarugenge Districts",
+                "image_url": "",
+                "target_beneficiaries": "Youth and communities at risk of HIV",
+                "location": "Rwanda",
                 "is_featured": True,
                 "order": 4,
             },
             {
-                "title": "Sustainable Agriculture, Livestock & Cooperatives",
-                "category": "agriculture",
-                "summary": "Strengthening food security and household incomes through agricultural cooperatives, pineapple farming, livestock distribution, and rural savings (Ibimina).",
+                "title": "Adopting Agroforestry for Land Restoration, Sustainable Livelihoods and Community Well-being in Rutsiro District",
+                "category": "flr",
+                "summary": "Agroforestry for land restoration, sustainable livelihoods, and community well-being in Rutsiro District, Western Province. Financed by Vumbuzi Impact Africa Foundation (VIA) in partnership with TerraFund and the World Resources Institute (WRI).",
                 "description": (
-                    "MPCR empowers smallholders by grouping vulnerable community members into structured agricultural cooperatives. "
-                    "Successes include pineapple farming support in Kirwa Cell (Kayenzi), cattle distribution to 240 cooperative members "
-                    "in Kamonyi District in collaboration with local government, goat provision to champion farmers in Gatsibo, and "
-                    "fostering community savings and lending associations (Ibimina)."
+                    "The project adopts agroforestry for land restoration, sustainable livelihoods, and community well-being in Rutsiro District, Western Province. "
+                    "It is financed by Vumbuzi Impact Africa Foundation (VIA). "
+                    "Implementation is in partnership with TerraFund and the World Resources Institute (WRI). "
+                    "Communities restore degraded land while strengthening household livelihoods."
                 ),
-                "icon": "users",
-                "image_url": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Cooperative farmers, rural households, vulnerable smallholders",
-                "location": "Kayenzi, Kamonyi, Gatsibo, and Rutsiro",
+                "icon": "tree",
+                "image_url": "",
+                "target_beneficiaries": "Farming communities and rural households",
+                "location": "Rutsiro District, Western Province",
                 "is_featured": True,
                 "order": 5,
-            },
-            {
-                "title": "Youth Skills, Vocational Training & Higher Education",
-                "category": "education",
-                "summary": "Empowering youth for self-reliance through vocational trades, carpentry, entrepreneurship, and university scholarships.",
-                "description": (
-                    "Education is a cornerstone of MPCR's development strategy. With funding from the Embassy of Switzerland, MPCR "
-                    "implemented vocational training projects in Gatsibo District to equip youth with marketable trades like carpentry "
-                    "and masonry. In higher education, MPCR has sponsored student leaders at Kigali Independent University (ULK) up to "
-                    "graduation, and continues mobilizing university students nationwide."
-                ),
-                "icon": "award",
-                "image_url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
-                "target_beneficiaries": "Unemployed youth, students, emerging community leaders",
-                "location": "Gatsibo District & Kigali City",
-                "is_featured": True,
-                "order": 6,
             },
         ]
 

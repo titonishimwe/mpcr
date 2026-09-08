@@ -8,15 +8,23 @@
      Hero Section
      ======================================================================== -->
 <section class="hero">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="hero-slide is-active" style="background-image: url('{% static 'images/hero/slide-1.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-2.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-3.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-4.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-5.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-6.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-7.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-8.png' %}');"></div>
+    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-9.png' %}');"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
-        <div class="hero-badge-tag">
-          <i class="fas fa-cross"></i>
-          <span>FAITH • COMMUNITY • SUSTAINABLE TRANSFORMATION</span>
-        </div>
         <h1 class="hero-title">
-          Preaching Christ, Empowering Lives & <span>Restoring Landscapes</span>
+          Mouvent Pour Christe <span>au Rwanda ( MPCR )</span>
         </h1>
         <p class="hero-tagline">
           "Roho nzima itura mu mubiri muzima" — A healthy spirit lives in a healthy body.
@@ -77,81 +85,29 @@
 </section>
 
 <!-- ========================================================================
-     Impact Statistics Bar
-     ======================================================================== -->
-<section class="stats-section">
-  <div class="stats-grid">
-    {% for stat in stats %}
-      <div class="stat-item">
-        <div class="stat-value">{{ stat.value }}</div>
-        <div class="stat-label">{{ stat.label }}</div>
-        <div class="stat-desc">{{ stat.description }}</div>
-      </div>
-    {% empty %}
-      <div class="stat-item"><div class="stat-value">105+</div><div class="stat-label">Hectares Restored</div></div>
-      <div class="stat-item"><div class="stat-value">28,800+</div><div class="stat-label">Tree Seedlings</div></div>
-      <div class="stat-item"><div class="stat-value">150+</div><div class="stat-label">Champion Farmers</div></div>
-      <div class="stat-item"><div class="stat-value">240+</div><div class="stat-label">Livestock Provided</div></div>
-      <div class="stat-item"><div class="stat-value">25+</div><div class="stat-label">Partner Churches</div></div>
-    {% endfor %}
-  </div>
-</section>
-
-<!-- ========================================================================
-     About & Core Values Preview
+     Organizational Profile
      ======================================================================== -->
 <section class="about-preview">
   <div class="container">
-    <div class="about-grid">
-      <div class="about-narrative">
-        <span class="section-badge">Who We Are</span>
-        <h2>Guided by Christian Faith, Dedicated to People and Planet</h2>
+    <div class="org-profile">
+      <div class="org-profile-copy">
+        <span class="section-badge">Organizational Profile</span>
+        <h2>Who We Are</h2>
         <p>
-          Founded in Kinyinya, Gasabo District, MPCR began with a divine vision to unite evangelism with concrete community development. We believe that true spiritual transformation flourishes when human dignity, food security, environmental stewardship, and physical health are restored together.
+          <strong>Mouvement Pour Christ au Rwanda (MPCR)</strong> is a faith-based non-governmental organization working in Rwanda. It was created out of a deep Christian conviction that faith must be demonstrated through practical action and holistic human upliftment.
         </p>
         <p>
-          Our field interventions span Nyarugenge, Gasabo, and Kicukiro in Kigali City; Gatsibo in the Eastern Province; Rusizi, Ngororero, and Rutsiro in the Western Province; and Nyanza and Kamonyi in the Southern Province.
+          Our approach integrates the message of Christ with sustainable socio-economic development. We walk alongside rural and urban communities to strengthen family stability, safeguard vulnerable children, equip youth with income-generating skills, empower women through cooperatives, protect the natural environment, and foster community health.
         </p>
-
-        <div class="about-highlights-grid">
-          <div class="highlight-box">
-            <h4><i class="fas fa-eye" style="color: var(--accent-green);"></i> Our Vision</h4>
-            <p>Leading positive change by preaching the Gospel, promoting good living, economic resilience, and environmental sustainability.</p>
-          </div>
-          <div class="highlight-box">
-            <h4><i class="fas fa-bullseye" style="color: var(--accent-gold);"></i> Our Mission</h4>
-            <p>To make Christ known and transform lives through evangelism, community-led initiatives, and socio-economic empowerment.</p>
-          </div>
-        </div>
-
-        <a href="{% url 'about' %}" class="btn btn-secondary">
-          <i class="fas fa-info-circle"></i> Learn More About Our Organization
-        </a>
+        <blockquote class="org-quote">
+          &ldquo;Roho nzima ituruka mu mubiri muzima&rdquo; &mdash; A healthy spirit lives in a healthy body
+        </blockquote>
       </div>
-
-      <div>
-        <div class="values-grid">
-          <div class="value-card">
-            <div class="value-icon"><i class="fas fa-heart"></i></div>
-            <h3>Gukunda Imana (Faith & Reverence)</h3>
-            <p>Deep devotion, worship, and obedience to God as the foundation of all righteous actions and community healing.</p>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><i class="fas fa-hands-helping"></i></div>
-            <h3>Impuhwe (Compassion)</h3>
-            <p>Christ-like empathy reaching the vulnerable, orphans, widows, refugees, and impoverished smallholder families.</p>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><i class="fas fa-balance-scale"></i></div>
-            <h3>Ubunyangamugayo (Integrity)</h3>
-            <p>Accountable governance, ethical leadership, and transparent management in all partner funds and resources.</p>
-          </div>
-          <div class="value-card">
-            <div class="value-icon"><i class="fas fa-leaf"></i></div>
-            <h3>Iterambere Rirambye (Sustainability)</h3>
-            <p>Long-term environmental care and economic resilience ensuring future generations inherit a thriving land.</p>
-          </div>
-        </div>
+      <div class="org-profile-media">
+        <img
+          src="{% static 'images/ngororero-headquarters.png' %}"
+          alt="MPCR team at Ngororero District Headquarters"
+        >
       </div>
     </div>
   </div>
@@ -181,7 +137,6 @@
             {% else %}
               <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="{{ program.title }}">
             {% endif %}
-            <span class="program-category-pill">{{ program.get_category_display }}</span>
           </div>
           <div class="program-body">
             <h3 class="program-title">{{ program.title }}</h3>
@@ -190,10 +145,6 @@
               <div class="program-meta-item">
                 <i class="fas fa-map-pin"></i>
                 <span>{{ program.location }}</span>
-              </div>
-              <div class="program-meta-item">
-                <i class="fas fa-user-friends"></i>
-                <span>{{ program.target_beneficiaries }}</span>
               </div>
             </div>
           </div>
@@ -205,42 +156,6 @@
       <a href="{% url 'programs' %}" class="btn btn-primary">
         <i class="fas fa-th-list"></i> View All Detailed Programs & Activities
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================================
-     Testimonials / Beneficiary Stories
-     ======================================================================== -->
-<section class="testimonials-section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-badge">Voices from the Field</span>
-      <h2 class="section-title">Testimonials & Community Impact</h2>
-      <p class="section-subtitle">
-        Real stories from farmers, community leaders, and local government partners whose lives and farmlands have been transformed.
-      </p>
-    </div>
-
-    <div class="testimonials-grid">
-      {% for testimonial in testimonials %}
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
-          <div class="testimonial-author">
-            {% if testimonial.image_url %}
-              <img src="{{ testimonial.image_url }}" alt="{{ testimonial.author }}" class="author-avatar">
-            {% else %}
-              <div class="author-avatar" style="background: var(--primary-navy); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                {{ testimonial.author|slice:":1" }}
-              </div>
-            {% endif %}
-            <div class="author-info">
-              <h4>{{ testimonial.author }}</h4>
-              <p>{{ testimonial.role }} • {{ testimonial.location }}</p>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
     </div>
   </div>
 </section>
@@ -290,33 +205,68 @@
 </section>
 
 <!-- ========================================================================
-     Strategic Partners Section
+     Our Team
      ======================================================================== -->
-<section class="partners-section">
+<section class="team-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Alliances & Cooperation</span>
-      <h2 class="section-title">Our Strategic Partners</h2>
+      <span class="section-badge">Our Team</span>
+      <h2 class="section-title">The People Behind MPCR</h2>
       <p class="section-subtitle">
-        We collaborate with national ministries, international donors, technical research bodies, and Christian institutions.
+        A committed leadership and field team guiding evangelism, community development, and landscape restoration across Rwanda.
       </p>
     </div>
 
-    <div class="partners-grid">
-      {% for partner in partners %}
-        <div class="partner-card">
-          <span class="partner-name">{{ partner.name }}</span>
-          <span class="partner-category">{{ partner.category }}</span>
+    {% if team_members %}
+      <div class="team-slider" data-team-slider>
+        <button type="button" class="team-slider-btn team-slider-prev" data-team-prev aria-label="Previous team members" hidden>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="team-slider-viewport" data-team-viewport>
+          <div class="team-slider-track" data-team-track>
+            {% for member in team_members %}
+              <article class="team-card">
+                {% if member.photo %}
+                  <img class="team-photo" src="{{ member.photo.url }}" alt="{{ member.name }}">
+                {% else %}
+                  <div class="team-avatar" aria-hidden="true">{{ member.initials }}</div>
+                {% endif %}
+                <div class="team-details">
+                  <h3>{{ member.name }}</h3>
+                  <p class="team-role">{{ member.position }}</p>
+                  <ul class="team-contact">
+                    {% if member.phone %}
+                      <li>
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:{{ member.phone }}">{{ member.phone }}</a>
+                      </li>
+                    {% endif %}
+                    {% if member.email %}
+                      <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
         </div>
-      {% endfor %}
-    </div>
+        <button type="button" class="team-slider-btn team-slider-next" data-team-next aria-label="Next team members" hidden>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    {% else %}
+      <p class="section-subtitle">Team contacts will appear here once members are added.</p>
+    {% endif %}
   </div>
 </section>
 
 <!-- ========================================================================
      Call to Action Banner
      ======================================================================== -->
-<section style="background: linear-gradient(135deg, var(--primary-navy), #15803D); color: #fff; padding: 5rem 0; text-align: center;">
+<section class="page-banner" style="text-align: center;">
   <div class="container">
     <h2 style="font-size: 2.35rem; font-weight: 900; margin-bottom: 1rem;">Partner With Us in Transforming Rwanda</h2>
     <p style="font-size: 1.15rem; max-width: 680px; margin: 0 auto 2rem; color: #E2E8F0;">
