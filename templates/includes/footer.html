@@ -4,7 +4,7 @@
     <div class="footer-grid">
       <!-- Col 1: Identity & Legal -->
       <div class="footer-brand">
-        <img src="{% static 'images/logo.svg' %}" alt="MPCR Logo">
+        <img src="{% static 'images/logo.png' %}" alt="MPCR Logo">
         <p class="footer-about">
           <strong>Movement for Christ in Rwanda (MPCR)</strong> is a faith-based non-governmental organization committed to transforming communities through the Gospel, holistic health, sustainable landscape restoration, and economic self-reliance.
         </p>
@@ -30,12 +30,10 @@
       <div class="footer-col">
         <h4>Our Focus</h4>
         <ul class="footer-links">
-          <li><a href="{% url 'programs' %}?category=flr"><i class="fas fa-tree"></i> Landscape Restoration</a></li>
-          <li><a href="{% url 'programs' %}?category=evangelism"><i class="fas fa-bible"></i> Evangelism & Bible Study</a></li>
-          <li><a href="{% url 'programs' %}?category=child_women"><i class="fas fa-shield-alt"></i> Child & Women Rights</a></li>
-          <li><a href="{% url 'programs' %}?category=agriculture"><i class="fas fa-seedling"></i> Farming & Cooperatives</a></li>
-          <li><a href="{% url 'programs' %}?category=health"><i class="fas fa-heartbeat"></i> Community Health & HIV</a></li>
-          <li><a href="{% url 'programs' %}?category=education"><i class="fas fa-graduation-cap"></i> Youth Vocational Skills</a></li>
+          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Evangelism</a></li>
+          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Social (well being)</a></li>
+          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Economic</a></li>
+          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Development</a></li>
         </ul>
       </div>
 

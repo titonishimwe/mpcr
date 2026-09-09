@@ -63,7 +63,7 @@ class MPCRWebpageTests(TestCase):
         self.assertTemplateUsed(response, "core/about.html")
         self.assertContains(response, "About MPCR")
         self.assertContains(response, "Nyamirambo")
-        self.assertContains(response, "Eraste NDAYISENGA")
+        self.assertContains(response, "Our Core Values")
         self.assertContains(response, "166/2023")
 
     def test_programs_page_status_and_filter(self):

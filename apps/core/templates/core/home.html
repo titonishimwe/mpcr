@@ -264,6 +264,48 @@
 </section>
 
 <!-- ========================================================================
+     Our Partners
+     ======================================================================== -->
+<section class="partners-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Partners</span>
+      <h2 class="section-title">Organizations We Work With</h2>
+    </div>
+  {% if partners %}
+    <div class="partner-marquee" aria-label="Partner logos">
+      <div class="partner-track">
+        {% for partner in partners %}
+          <article class="partner-logo{% if not partner.logo and not partner.logo_url %} is-thumb{% endif %}">
+            {% if partner.logo %}
+              <img src="{{ partner.logo.url }}" alt="{{ partner.name }}">
+            {% elif partner.logo_url %}
+              <img src="{{ partner.logo_url }}" alt="{{ partner.name }}">
+            {% else %}
+              <span class="partner-thumb" aria-hidden="true">{{ partner.mark }}</span>
+              <span class="partner-name">{{ partner.name }}</span>
+            {% endif %}
+          </article>
+        {% endfor %}
+        {% for partner in partners %}
+          <article class="partner-logo{% if not partner.logo and not partner.logo_url %} is-thumb{% endif %}" aria-hidden="true">
+            {% if partner.logo %}
+              <img src="{{ partner.logo.url }}" alt="">
+            {% elif partner.logo_url %}
+              <img src="{{ partner.logo_url }}" alt="">
+            {% else %}
+              <span class="partner-thumb">{{ partner.mark }}</span>
+              <span class="partner-name">{{ partner.name }}</span>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+  </div>
+</section>
+
+<!-- ========================================================================
      Call to Action Banner
      ======================================================================== -->
 <section class="page-banner" style="text-align: center;">

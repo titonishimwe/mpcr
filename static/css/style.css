@@ -160,7 +160,7 @@ img {
 }
 
 .brand-logo img {
-  height: 54px;
+  height: 64px;
   width: auto;
 }
 
@@ -925,7 +925,7 @@ img {
    Partners Showcase
    ========================================================================== */
 .team-section {
-  padding: 5rem 0;
+  padding: 5rem 0 2rem;
   background: #ffffff;
 }
 
@@ -1054,9 +1054,80 @@ img {
 }
 
 .partners-section {
-  padding: 4.5rem 0;
+  padding: 1.5rem 0 4.5rem;
   background-color: #ffffff;
-  border-top: 1px solid var(--border-color);
+}
+
+.partner-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.partner-track {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  width: max-content;
+  animation: partner-slide 42s linear infinite;
+}
+
+.partner-marquee:hover .partner-track {
+  animation-play-state: paused;
+}
+
+.partner-logo {
+  width: 168px;
+  height: 96px;
+  flex: 0 0 auto;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+}
+
+.partner-logo img {
+  max-width: 148px;
+  max-height: 78px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.partner-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #e8f5ec;
+  color: var(--accent-green);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.partner-name {
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes partner-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 .partners-grid {
@@ -1086,10 +1157,10 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
-.partner-name {
+.partner-card .partner-name {
   font-size: 0.95rem;
   font-weight: 800;
-  color: var(--primary-navy);
+  color: #374151;
 }
 
 .partner-category {
@@ -1524,10 +1595,9 @@ img {
 }
 
 .footer-brand img {
-  height: 52px;
+  height: 88px;
   width: auto;
   margin-bottom: 1.25rem;
-  filter: brightness(0) invert(1);
 }
 
 .footer-about {

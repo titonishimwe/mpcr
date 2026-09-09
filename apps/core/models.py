@@ -124,6 +124,18 @@ class Partner(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def mark(self):
+        short = (self.category or "").strip()
+        if short and len(short) <= 6 and " " not in short:
+            return short.upper()
+        parts = [part for part in self.name.replace("(", " ").replace(")", " ").split() if part[:1].isalpha()]
+        if not parts:
+            return "MP"
+        if len(parts) == 1:
+            return parts[0][:3].upper()
+        return "".join(part[0] for part in parts[:3]).upper()
+
 
 class TeamMember(models.Model):
     name = models.CharField(max_length=150)
