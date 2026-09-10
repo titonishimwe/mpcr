@@ -1,0 +1,33 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}Website content{% endblock %}
+
+{% block content %}
+<section class="dash-cards">
+  <a class="dash-stat" href="{% url 'cms_site_settings' %}">
+    <span>Site-wide</span>
+    <strong>Footer & contact</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'cms_hero_list' %}">
+    <span>Home hero slides</span>
+    <strong>{{ hero_count }}</strong>
+  </a>
+</section>
+
+<section class="dash-panel">
+  <div class="dash-panel-head">
+    <h2>Edit page by page</h2>
+  </div>
+  <ul class="dash-message-list">
+    {% for page in pages %}
+      <li>
+        <a href="{% url 'cms_page_edit' page=page.key %}">
+          <strong>{{ page.label }}</strong>
+          <span>{{ page.count }} editable fields</span>
+        </a>
+        <a href="{% url 'cms_page_edit' page=page.key %}">Edit</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

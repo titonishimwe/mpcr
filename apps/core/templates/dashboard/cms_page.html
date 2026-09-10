@@ -1,0 +1,39 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}Edit {{ page_label }}{% endblock %}
+
+{% block content %}
+<section class="dash-panel">
+  <p class="dash-help">Change the text and images for the {{ page_label }} page. Leave an image URL blank if you upload a file.</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for section in sections %}
+      <div class="form-group cms-section-field">
+        <label>{{ section.label }}</label>
+        {% if section.field_type == "image" %}
+          {% if section.image %}
+            <p class="dash-help">Current upload: {{ section.image.url }}</p>
+            <label class="dash-check-label"><input class="dash-check" type="checkbox" name="section_{{ section.pk }}_clear_image"> Remove uploaded image</label>
+          {% endif %}
+          <input class="form-input" type="file" name="section_{{ section.pk }}_image" accept="image/*">
+          <input class="form-input" type="text" name="section_{{ section.pk }}_image_url" value="{{ section.image_url }}" placeholder="Static path or URL fallback">
+        {% elif section.field_type == "textarea" or section.field_type == "list" %}
+          <textarea class="form-textarea" name="section_{{ section.pk }}_value" rows="5">{{ section.value }}</textarea>
+          {% if section.field_type == "list" %}
+            <p class="dash-help">One item per line. For titled items use Title|Detail.</p>
+          {% endif %}
+        {% else %}
+          <input class="form-input" type="text" name="section_{{ section.pk }}_value" value="{{ section.value }}">
+        {% endif %}
+      </div>
+    {% endfor %}
+    <div class="dash-form-actions">
+      <button type="submit" class="btn btn-primary">Save {{ page_label }}</button>
+      <a href="{% url 'cms_home' %}" class="btn btn-outline">Back</a>
+      {% if page_key == "home" %}
+        <a href="{% url 'cms_hero_list' %}" class="btn btn-outline">Manage hero slides</a>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

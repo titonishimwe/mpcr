@@ -1,0 +1,54 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}Overview{% endblock %}
+
+{% block content %}
+<section class="dash-cards">
+  <a class="dash-stat" href="{% url 'dashboard_list' resource='programs' %}">
+    <span>Programs</span>
+    <strong>{{ counts.programs }}</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'dashboard_list' resource='gallery' %}">
+    <span>Gallery photos</span>
+    <strong>{{ counts.gallery }}</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'dashboard_list' resource='team' %}">
+    <span>Active team</span>
+    <strong>{{ counts.team }}</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'dashboard_list' resource='partners' %}">
+    <span>Partners</span>
+    <strong>{{ counts.partners }}</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'dashboard_list' resource='stats' %}">
+    <span>Impact stats</span>
+    <strong>{{ counts.stats }}</strong>
+  </a>
+  <a class="dash-stat" href="{% url 'dashboard_messages' %}">
+    <span>Unread messages</span>
+    <strong>{{ unread_messages }}</strong>
+  </a>
+</section>
+
+<section class="dash-panel">
+  <div class="dash-panel-head">
+    <h2>Recent messages</h2>
+    <a href="{% url 'dashboard_messages' %}">View all</a>
+  </div>
+  {% if recent_messages %}
+    <ul class="dash-message-list">
+      {% for item in recent_messages %}
+        <li>
+          <a href="{% url 'dashboard_message' pk=item.pk %}">
+            <strong>{{ item.subject }}</strong>
+            <span>{{ item.name }} · {{ item.created_at|date:"d M Y" }}</span>
+          </a>
+          {% if not item.is_read %}<em>New</em>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="dash-empty">No contact messages yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

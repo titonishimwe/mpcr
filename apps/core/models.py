@@ -1,20 +1,22 @@
+from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
 
 
+CONTENT_CATEGORY_CHOICES = [
+    ("evangelism", "Evangelism"),
+    ("social", "Social (well being)"),
+    ("economic", "Economic"),
+    ("development", "Development"),
+]
+
+
 class Program(models.Model):
-    CATEGORY_CHOICES = [
-        ("flr", "Landscape Restoration & Environment"),
-        ("evangelism", "Evangelism & Biblical Education"),
-        ("child_women", "Child Protection & Women Empowerment"),
-        ("health", "Health, Nutrition & HIV Eradication"),
-        ("agriculture", "Sustainable Agriculture & Cooperatives"),
-        ("education", "Education & Vocational Training"),
-    ]
+    CATEGORY_CHOICES = CONTENT_CATEGORY_CHOICES
 
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="flr")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="evangelism")
     summary = models.TextField(help_text="Short summary displayed on cards and previews")
     description = models.TextField(help_text="Detailed description of the program and its impact")
     icon = models.CharField(max_length=50, default="tree", help_text="Icon identifier (e.g. tree, cross, shield, heart, sprouter)")
@@ -46,16 +48,10 @@ class Program(models.Model):
 
 
 class GalleryImage(models.Model):
-    CATEGORY_CHOICES = [
-        ("flr", "Forest Landscape Restoration & Nurseries"),
-        ("community", "Community Action & Cooperatives"),
-        ("education", "Education & Graduations"),
-        ("health", "Healthcare & Family Planning"),
-        ("leadership", "Leadership & Field Visits"),
-    ]
+    CATEGORY_CHOICES = CONTENT_CATEGORY_CHOICES
 
     title = models.CharField(max_length=200)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="flr")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="evangelism")
     caption = models.TextField(blank=True)
     image = models.ImageField(upload_to="gallery/", blank=True, null=True)
     image_url = models.CharField(max_length=500, blank=True, help_text="Fallback or local static photo URL")
@@ -179,3 +175,250 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.location}"
+
+
+class StaffProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="account_profile",
+    )
+    pending_email = models.EmailField(blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.user.get_username()
+
+
+class AccountActivity(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="account_activities",
+    )
+    action = models.CharField(max_length=80)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Account activity"
+        verbose_name_plural = "Account activity"
+
+    def __str__(self):
+        return f"{self.user} — {self.action}"
+
+
+class SiteSettings(models.Model):
+    org_name = models.CharField(max_length=200, default="Movement for Christ in Rwanda (MPCR)")
+    org_name_fr = models.CharField(max_length=200, blank=True, default="Mouvement Pour Christ au Rwanda")
+    footer_about = models.TextField(blank=True)
+    legal_badge = models.CharField(max_length=255, blank=True)
+    address_line_1 = models.CharField(max_length=255, blank=True)
+    address_line_2 = models.CharField(max_length=255, blank=True)
+    postal_box = models.CharField(max_length=120, blank=True)
+    phone_primary = models.CharField(max_length=40, blank=True)
+    phone_primary_raw = models.CharField(max_length=40, blank=True)
+    phone_secondary = models.CharField(max_length=40, blank=True)
+    phone_secondary_raw = models.CharField(max_length=40, blank=True)
+    email_primary = models.EmailField(blank=True)
+    email_secondary = models.EmailField(blank=True)
+    whatsapp_number = models.CharField(max_length=40, blank=True)
+    whatsapp_message = models.CharField(max_length=255, blank=True)
+    facebook_url = models.URLField(blank=True)
+    instagram_url = models.URLField(blank=True)
+    twitter_url = models.URLField(blank=True)
+    focus_items = models.TextField(blank=True, help_text="One focus item per line")
+    footer_copyright = models.CharField(max_length=255, blank=True)
+    footer_tagline = models.CharField(max_length=255, blank=True)
+    social_handle = models.CharField(max_length=80, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Site settings"
+        verbose_name_plural = "Site settings"
+
+    def __str__(self):
+        return "Site settings"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        obj, _created = cls.objects.get_or_create(pk=1)
+        return obj
+
+    @property
+    def focus_list(self):
+        return [line.strip() for line in self.focus_items.splitlines() if line.strip()]
+
+    @property
+    def whatsapp_url(self):
+        number = "".join(ch for ch in (self.whatsapp_number or "") if ch.isdigit())
+        if not number:
+            return "#"
+        from urllib.parse import quote
+
+        message = quote(self.whatsapp_message or "")
+        return f"https://wa.me/{number}?text={message}" if message else f"https://wa.me/{number}"
+
+
+class PageSection(models.Model):
+    FIELD_TEXT = "text"
+    FIELD_TEXTAREA = "textarea"
+    FIELD_LIST = "list"
+    FIELD_IMAGE = "image"
+    FIELD_CHOICES = [
+        (FIELD_TEXT, "Short text"),
+        (FIELD_TEXTAREA, "Long text"),
+        (FIELD_LIST, "List"),
+        (FIELD_IMAGE, "Image"),
+    ]
+    PAGE_CHOICES = [
+        ("home", "Home"),
+        ("about", "About"),
+        ("programs", "Programs"),
+        ("gallery", "Gallery"),
+        ("contact", "Contact"),
+    ]
+
+    page = models.CharField(max_length=40, choices=PAGE_CHOICES, db_index=True)
+    key = models.SlugField(max_length=80)
+    label = models.CharField(max_length=120)
+    field_type = models.CharField(max_length=20, choices=FIELD_CHOICES, default=FIELD_TEXT)
+    value = models.TextField(blank=True)
+    image = models.ImageField(upload_to="cms/", blank=True, null=True)
+    image_url = models.CharField(max_length=500, blank=True, help_text="Static path or external URL fallback")
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["page", "order", "key"]
+        unique_together = [("page", "key")]
+        verbose_name = "Page section"
+        verbose_name_plural = "Page sections"
+
+    def __str__(self):
+        return f"{self.page}:{self.key}"
+
+    @property
+    def lines(self):
+        return [line.strip() for line in self.value.splitlines() if line.strip()]
+
+    @property
+    def pairs(self):
+        items = []
+        for line in self.lines:
+            if "|" in line:
+                title, detail = line.split("|", 1)
+                items.append((title.strip(), detail.strip()))
+            else:
+                items.append((line, ""))
+        return items
+
+    @property
+    def media_url(self):
+        if self.image:
+            return self.image.url
+        return self.image_url or ""
+
+
+class HeroSlide(models.Model):
+    title = models.CharField(max_length=120, blank=True)
+    image = models.ImageField(upload_to="hero/", blank=True, null=True)
+    image_url = models.CharField(max_length=500, blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Hero slide"
+        verbose_name_plural = "Hero slides"
+
+    def __str__(self):
+        return self.title or f"Slide {self.order}"
+
+    @property
+    def media_url(self):
+        if self.image:
+            return self.image.url
+        return self.image_url or ""
+
+
+class EmptySection:
+    value = ""
+    image = None
+    image_url = ""
+    lines = []
+    pairs = []
+    media_url = ""
+
+
+class SectionMap(dict):
+    def __missing__(self, key):
+        return EmptySection()
+
+    def text(self, key, default=""):
+        section = self.get(key)
+        if section and getattr(section, "value", ""):
+            return section.value
+        return default
+
+    def lines(self, key):
+        section = self.get(key)
+        return section.lines if section and hasattr(section, "lines") else []
+
+    def pairs(self, key):
+        section = self.get(key)
+        return section.pairs if section and hasattr(section, "pairs") else []
+
+    def media(self, key, default=""):
+        section = self.get(key)
+        url = getattr(section, "media_url", "") if section else ""
+        return url or default
+
+
+def get_page_sections(page):
+    queryset = PageSection.objects.filter(page=page)
+    if not queryset.exists():
+        ensure_cms_defaults()
+        queryset = PageSection.objects.filter(page=page)
+    return SectionMap({section.key: section for section in queryset})
+
+
+def ensure_cms_defaults():
+    from .cms_defaults import HERO_SLIDE_DEFAULTS, SECTION_DEFAULTS, SITE_SETTINGS_DEFAULTS
+
+    settings_obj = SiteSettings.load()
+    for field, value in SITE_SETTINGS_DEFAULTS.items():
+        if not getattr(settings_obj, field):
+            setattr(settings_obj, field, value)
+    settings_obj.save()
+
+    existing = {(s.page, s.key) for s in PageSection.objects.all().only("page", "key")}
+    to_create = []
+    for page, key, label, field_type, value, order in SECTION_DEFAULTS:
+        if (page, key) in existing:
+            continue
+        section = PageSection(
+            page=page,
+            key=key,
+            label=label,
+            field_type=field_type,
+            order=order,
+        )
+        if field_type == PageSection.FIELD_IMAGE:
+            section.image_url = value
+        else:
+            section.value = value
+        to_create.append(section)
+    if to_create:
+        PageSection.objects.bulk_create(to_create)
+
+    if not HeroSlide.objects.exists():
+        HeroSlide.objects.bulk_create(
+            [
+                HeroSlide(title=f"Slide {index}", image_url=path, order=index, is_active=True)
+                for index, path in enumerate(HERO_SLIDE_DEFAULTS, start=1)
+            ]
+        )

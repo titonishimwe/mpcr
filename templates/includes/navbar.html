@@ -16,6 +16,9 @@
       <li><a href="{% url 'programs' %}" class="nav-link {% if request.resolver_match.url_name == 'programs' %}active{% endif %}">Our Programs</a></li>
       <li><a href="{% url 'gallery' %}" class="nav-link {% if request.resolver_match.url_name == 'gallery' %}active{% endif %}">Gallery</a></li>
       <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact Us</a></li>
+      {% if request.user.is_staff %}
+        <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+      {% endif %}
       <li><a href="{% url 'contact' %}" class="nav-cta-btn"><i class="fas fa-paper-plane"></i> Get in Touch</a></li>
     </ul>
   </div>

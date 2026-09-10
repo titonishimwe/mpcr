@@ -1,129 +1,88 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cms_tags %}
 
 {% block title %}Home - Movement for Christ in Rwanda (MPCR){% endblock %}
 
 {% block content %}
-<!-- ========================================================================
-     Hero Section
-     ======================================================================== -->
 <section class="hero">
   <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide is-active" style="background-image: url('{% static 'images/hero/slide-1.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-2.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-3.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-4.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-5.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-6.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-7.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-8.png' %}');"></div>
-    <div class="hero-slide" style="background-image: url('{% static 'images/hero/slide-9.png' %}');"></div>
+    {% for slide in hero_slides %}
+      <div class="hero-slide{% if forloop.first %} is-active{% endif %}" style="background-image: url('{{ slide.media_url|cms_media }}');"></div>
+    {% empty %}
+      <div class="hero-slide is-active" style="background-image: url('{% static 'images/hero/slide-1.png' %}');"></div>
+    {% endfor %}
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
         <h1 class="hero-title">
-          Mouvent Pour Christe <span>au Rwanda ( MPCR )</span>
+          {{ cms.hero_title.value|default:"Mouvent Pour Christe" }} <span>{{ cms.hero_title_accent.value|default:"au Rwanda ( MPCR )" }}</span>
         </h1>
-        <p class="hero-tagline">
-          "Roho nzima itura mu mubiri muzima" — A healthy spirit lives in a healthy body.
-        </p>
-        <p class="hero-text">
-          Movement for Christ in Rwanda (MPCR) is a legally registered Christian non-governmental organization committed to holistic evangelism, sustainable agriculture, child protection, community health, and forest landscape restoration across Rwanda.
-        </p>
+        <p class="hero-tagline">{{ cms.hero_tagline.value }}</p>
+        <p class="hero-text">{{ cms.hero_text.value }}</p>
         <div class="hero-actions">
           <a href="{% url 'programs' %}" class="btn btn-primary">
-            <i class="fas fa-seedling"></i> Explore Our Programs
+            <i class="fas fa-seedling"></i> {{ cms.hero_cta_primary.value|default:"Explore Our Programs" }}
           </a>
           <a href="{% url 'contact' %}" class="btn btn-white">
-            <i class="fas fa-envelope"></i> Contact Us
+            <i class="fas fa-envelope"></i> {{ cms.hero_cta_secondary.value|default:"Contact Us" }}
           </a>
-          <a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
-            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-          </a>
+          {% if site and site.whatsapp_url %}
+            <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+              <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+          {% endif %}
         </div>
       </div>
 
-      <!-- Hero Card Highlight -->
       <div class="hero-card">
         <div class="hero-card-header">
           <div class="hero-card-icon">
             <i class="fas fa-bible"></i>
           </div>
           <div>
-            <h3>Our Foundation</h3>
-            <span style="color: var(--accent-gold-light); font-size: 0.85rem; font-weight: 700;">John 3:16 / Jean 3:16</span>
+            <h3>{{ cms.hero_card_title.value|default:"Our Foundation" }}</h3>
+            <span style="color: var(--accent-gold-light); font-size: 0.85rem; font-weight: 700;">{{ cms.hero_card_ref.value }}</span>
           </div>
         </div>
-        <p class="hero-verse-quote">
-          "That whoever believes in HIM should not perish but have eternal life."
-          <br>
-          <small style="color: #CBD5E1;"><em>Afin que tout homme qui croit en LUI ne périsse pas mais ait la vie éternelle: CHRIST.</em></small>
-        </p>
+        <p class="hero-verse-quote">{{ cms.hero_card_quote.value|cms_br }}</p>
         <ul class="hero-features-list">
-          <li>
-            <i class="fas fa-check-circle"></i>
-            <span><strong>Accredited NGO:</strong> Legal Compliance No. 166/2023 under Law No 06/2012</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle"></i>
-            <span><strong>FLR Leader:</strong> Restoring 105+ ha in Gatsibo with TerraFund & WRI</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle"></i>
-            <span><strong>Church Alliance:</strong> Partnering with over 25 churches nationwide</span>
-          </li>
-          <li>
-            <i class="fas fa-check-circle"></i>
-            <span><strong>Headquarters:</strong> Nyamirambo Sector, Nyarugenge District, Kigali City</span>
-          </li>
+          {% for title, detail in cms.hero_features.pairs %}
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span><strong>{{ title }}</strong>{% if detail %} {{ detail }}{% endif %}</span>
+            </li>
+          {% endfor %}
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========================================================================
-     Organizational Profile
-     ======================================================================== -->
 <section class="about-preview">
   <div class="container">
     <div class="org-profile">
       <div class="org-profile-copy">
-        <span class="section-badge">Organizational Profile</span>
-        <h2>Who We Are</h2>
-        <p>
-          <strong>Mouvement Pour Christ au Rwanda (MPCR)</strong> is a faith-based non-governmental organization working in Rwanda. It was created out of a deep Christian conviction that faith must be demonstrated through practical action and holistic human upliftment.
-        </p>
-        <p>
-          Our approach integrates the message of Christ with sustainable socio-economic development. We walk alongside rural and urban communities to strengthen family stability, safeguard vulnerable children, equip youth with income-generating skills, empower women through cooperatives, protect the natural environment, and foster community health.
-        </p>
-        <blockquote class="org-quote">
-          &ldquo;Roho nzima ituruka mu mubiri muzima&rdquo; &mdash; A healthy spirit lives in a healthy body
-        </blockquote>
+        <span class="section-badge">{{ cms.profile_badge.value }}</span>
+        <h2>{{ cms.profile_title.value }}</h2>
+        <p>{{ cms.profile_text_1.value }}</p>
+        <p>{{ cms.profile_text_2.value }}</p>
+        <blockquote class="org-quote">{{ cms.profile_quote.value }}</blockquote>
       </div>
       <div class="org-profile-media">
-        <img
-          src="{% static 'images/ngororero-headquarters.png' %}"
-          alt="MPCR team at Ngororero District Headquarters"
-        >
+        <img src="{{ cms.profile_image.media_url|default:'images/ngororero-headquarters.png'|cms_media }}" alt="{{ cms.profile_title.value }}">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========================================================================
-     Featured Programs / Activities
-     ======================================================================== -->
 <section class="programs-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">What We Do</span>
-      <h2 class="section-title">Our Key Programs & Activities</h2>
-      <p class="section-subtitle">
-        Combining spiritual nourishment with impactful social, environmental, and economic initiatives across Rwandan communities.
-      </p>
+      <span class="section-badge">{{ cms.programs_badge.value }}</span>
+      <h2 class="section-title">{{ cms.programs_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.programs_subtitle.value }}</p>
     </div>
 
     <div class="programs-grid">
@@ -160,17 +119,12 @@
   </div>
 </section>
 
-<!-- ========================================================================
-     Gallery Preview Section
-     ======================================================================== -->
 <section class="gallery-section" style="background: #ffffff;">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Visual Impact</span>
-      <h2 class="section-title">Activities & Field Photos</h2>
-      <p class="section-subtitle">
-        Glimpses into our tree nurseries, cropland agroforestry, livestock awards, educational seminars, and community mobilizations.
-      </p>
+      <span class="section-badge">{{ cms.gallery_badge.value }}</span>
+      <h2 class="section-title">{{ cms.gallery_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.gallery_subtitle.value }}</p>
     </div>
 
     <div class="gallery-grid">
@@ -204,17 +158,12 @@
   </div>
 </section>
 
-<!-- ========================================================================
-     Our Team
-     ======================================================================== -->
 <section class="team-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Our Team</span>
-      <h2 class="section-title">The People Behind MPCR</h2>
-      <p class="section-subtitle">
-        A committed leadership and field team guiding evangelism, community development, and landscape restoration across Rwanda.
-      </p>
+      <span class="section-badge">{{ cms.team_badge.value }}</span>
+      <h2 class="section-title">{{ cms.team_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.team_subtitle.value }}</p>
     </div>
 
     {% if team_members %}
@@ -263,14 +212,11 @@
   </div>
 </section>
 
-<!-- ========================================================================
-     Our Partners
-     ======================================================================== -->
 <section class="partners-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Partners</span>
-      <h2 class="section-title">Organizations We Work With</h2>
+      <span class="section-badge">{{ cms.partners_badge.value }}</span>
+      <h2 class="section-title">{{ cms.partners_title.value }}</h2>
     </div>
   {% if partners %}
     <div class="partner-marquee" aria-label="Partner logos">
@@ -305,27 +251,23 @@
   </div>
 </section>
 
-<!-- ========================================================================
-     Call to Action Banner
-     ======================================================================== -->
 <section class="page-banner" style="text-align: center;">
   <div class="container">
-    <h2 style="font-size: 2.35rem; font-weight: 900; margin-bottom: 1rem;">Partner With Us in Transforming Rwanda</h2>
-    <p style="font-size: 1.15rem; max-width: 680px; margin: 0 auto 2rem; color: #E2E8F0;">
-      Whether you represent a church community, donor institution, development cooperative, or volunteer group, your collaboration makes a lasting impact.
-    </p>
+    <h2 style="font-size: 2.35rem; font-weight: 900; margin-bottom: 1rem;">{{ cms.cta_title.value }}</h2>
+    <p style="font-size: 1.15rem; max-width: 680px; margin: 0 auto 2rem; color: #E2E8F0;">{{ cms.cta_text.value }}</p>
     <div style="display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
       <a href="{% url 'contact' %}" class="btn btn-white">
         <i class="fas fa-paper-plane"></i> Send Us an Inquiry
       </a>
-      <a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
-        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-      </a>
+      {% if site and site.whatsapp_url %}
+        <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+      {% endif %}
     </div>
   </div>
 </section>
 
-<!-- Lightbox Modal Container -->
 <div class="modal-overlay" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="modal-content">
     <button class="modal-close" id="modalClose" aria-label="Close photo modal">&times;</button>

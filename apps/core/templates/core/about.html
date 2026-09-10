@@ -1,43 +1,33 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cms_tags %}
 
 {% block title %}About Us - Movement for Christ in Rwanda (MPCR){% endblock %}
 
 {% block content %}
-<!-- Page Header Banner -->
 <section class="page-banner">
   <div class="container">
-    <span class="section-badge">Our History & Identity</span>
-    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">About MPCR</h1>
-    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
-      Mouvement Pour Christ au Rwanda (Movement for Christ in Rwanda) is a religious non-governmental organization dedicated to preaching the Gospel and advancing socio-economic transformation.
-    </p>
+    <span class="section-badge">{{ cms.banner_badge.value }}</span>
+    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">{{ cms.banner_title.value }}</h1>
+    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">{{ cms.banner_text.value }}</p>
   </div>
 </section>
 
-<!-- Organizational Background & Legal Status -->
 <section style="padding: 5rem 0; background: #ffffff;">
   <div class="container">
     <div class="about-grid">
       <div>
-        <span class="section-badge">Historical Background</span>
+        <span class="section-badge">{{ cms.history_badge.value }}</span>
         <h2 style="font-size: 2.2rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem;">
-          Rooted in Kigali, Reaching Across the Nation
+          {{ cms.history_title.value }}
         </h2>
-        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.25rem;">
-          MPCR started its grassroots mission at Kinyinya in Gasabo District, Kigali City. Conceived as a response to both the spiritual thirst and the practical socio-economic vulnerabilities of rural and peri-urban populations, the organization has grown into an impactful nationwide institution.
-        </p>
-        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
-          The organization is governed by its official statutes and is fully subject to the provisions of Law No. 06/2012 of 17/02/2012 governing Civil Society Organizations and Faith-Based Organizations (FBOs) in the Republic of Rwanda. MPCR was granted its official <strong>Legal Personality Certificate of Compliance No. 166/2023</strong> by the Rwanda Governance Board (RGB).
-        </p>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.25rem;">{{ cms.history_text_1.value }}</p>
+        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">{{ cms.history_text_2.value }}</p>
 
         <div style="background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
           <h4 style="font-weight: 800; color: var(--primary-navy); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fas fa-building" style="color: var(--accent-green);"></i> Head Office Location
+            <i class="fas fa-building" style="color: var(--accent-green);"></i> {{ cms.office_title.value }}
           </h4>
-          <p style="color: var(--text-muted); margin-bottom: 0;">
-            The MPCR national head office is situated at <strong>Kigali City, Nyarugenge District, Nyamirambo Sector</strong>, providing strategic administrative coordination for all field programs and regional initiatives.
-          </p>
+          <p style="color: var(--text-muted); margin-bottom: 0;">{{ cms.office_text.value }}</p>
         </div>
       </div>
 
@@ -48,47 +38,37 @@
               <i class="fas fa-cross"></i>
             </div>
             <div>
-              <h3 style="font-weight: 800; color: var(--primary-navy); font-size: 1.35rem;">Christian Faith & Doctrine</h3>
-              <span style="color: var(--accent-gold); font-weight: 700; font-size: 0.9rem;">John 3:16 / Jean 3:16</span>
+              <h3 style="font-weight: 800; color: var(--primary-navy); font-size: 1.35rem;">{{ cms.faith_title.value }}</h3>
+              <span style="color: var(--accent-gold); font-weight: 700; font-size: 0.9rem;">{{ cms.faith_ref.value }}</span>
             </div>
           </div>
           <blockquote style="font-size: 1.05rem; font-style: italic; color: var(--primary-navy); line-height: 1.7; border-left: 4px solid var(--accent-green); padding-left: 1.25rem; margin-bottom: 1.5rem;">
-            "That whoever believes in HIM should not perish but have eternal life."
-            <br>
-            <small style="color: var(--text-muted);"><em>"Afin que tout homme qui croit en LUI ne périsse pas mais ait la vie éternelle: CHRIST."</em></small>
+            {{ cms.faith_quote.value|cms_br }}
           </blockquote>
-          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">
-            We affirm that the Gospel of Jesus Christ brings total redemption—restoring humanity's spiritual relationship with the Creator while motivating compassionate service to the poor, the brokenhearted, and the marginalized.
-          </p>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0;">{{ cms.faith_text.value }}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Vision, Mission & Core Values Section -->
 <section style="padding: 5rem 0; background: var(--bg-main);">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">What We Stand For</span>
-      <h2 class="section-title">Vision, Mission & Guiding Identity</h2>
-      <p class="section-subtitle">
-        Anchored in our guiding principle: <strong>"Roho nzima itura mu mubiri muzima"</strong> (A healthy spirit lives in a healthy body).
-      </p>
+      <span class="section-badge">{{ cms.identity_badge.value }}</span>
+      <h2 class="section-title">{{ cms.identity_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.identity_subtitle.value }}</p>
     </div>
 
-    <!-- Vision & Mission Side by Side -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+    <div class="two-col-grid" style="margin-bottom: 4rem;">
       <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
           <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-green-soft); color: var(--accent-green); display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
             <i class="fas fa-eye"></i>
           </div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-navy);">Our Vision</h3>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-navy);">{{ cms.vision_title.value }}</h3>
         </div>
-        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
-          Being a Faith Christian Organization leading positive change by preaching the gospel, promoting good living, economic development, and sustainable development because <strong>"A healthy spirit lives in a healthy body."</strong>
-        </p>
+        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">{{ cms.vision_text.value }}</p>
       </div>
 
       <div style="background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
@@ -96,85 +76,48 @@
           <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-gold-soft); color: var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 1.35rem;">
             <i class="fas fa-bullseye"></i>
           </div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-navy);">Our Mission</h3>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--primary-navy);">{{ cms.mission_title.value }}</h3>
         </div>
-        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">
-          To make Christ known and transform the lives of the people through evangelism, activities that improve the lives of the people, increase economic capacity, and promote sustainable development.
-        </p>
+        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7;">{{ cms.mission_text.value }}</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Objectives -->
 <section style="padding: 5rem 0; background: #ffffff;">
   <div class="container">
     <div style="background: var(--bg-main); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem;">
       <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.5rem; text-align: center;">
-        Objectives
+        {{ cms.objectives_title.value }}
       </h3>
       <div style="background: #fff; padding: 1.25rem 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
-        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 0.5rem;">General Objective</h4>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">
-          Promoting evangelism based on actions that address real problems of the people, in their well-being, economy and sustainable development.
-        </p>
+        <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 0.5rem;">{{ cms.general_objective_title.value }}</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0; line-height: 1.6;">{{ cms.general_objective.value }}</p>
       </div>
-      <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 1rem; text-align: center;">Specific Objectives</h4>
+      <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--accent-green); margin-bottom: 1rem; text-align: center;">{{ cms.specific_objectives_title.value }}</h4>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To evangelize youth and children</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To integrate children and youth in epidemic diseases eradication</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To fight against all forms of violence against children and women</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote environment</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote vocational trainings and cooperatives</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote child rights</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To reinforce income generating projects</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To promote care and social events</div>
-        <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> To combat HIV in communities</div>
+        {% for item in cms.specific_objectives.lines %}
+          <div style="background: #fff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; font-weight: 700; color: #111111;"><i class="fas fa-check" style="color: var(--accent-green);"></i> {{ item }}</div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
-<!-- Core Christian Values (Indangagaciro) -->
 <section style="padding: 5rem 0; background: var(--bg-main);">
   <div class="container">
-    <!-- Core Christian Values (Indangagaciro) -->
     <div class="section-header" style="margin-bottom: 2rem;">
-      <h3 style="font-size: 1.85rem; font-weight: 800; color: var(--primary-navy);">Our Core Values (Indangagaciro)</h3>
+      <h3 style="font-size: 1.85rem; font-weight: 800; color: var(--primary-navy);">{{ cms.values_title.value }}</h3>
     </div>
 
     <div class="values-panel">
       <div class="values-grid">
-        <div class="values-col">
+        {% for title, detail in cms.core_values.pairs %}
           <article class="value-card">
-            <h3>Gukunda Imana no Kuyubaha</h3>
-            <p>Devoted love and reverent fear of God guiding every decision, stewardship practice, and interpersonal interaction.</p>
+            <h3>{{ title }}</h3>
+            <p>{{ detail }}</p>
           </article>
-          <article class="value-card">
-            <h3>Gukorera mu Mucyo</h3>
-            <p>Transparency and open accountability toward beneficiaries, government authorities, donor partners, and churches.</p>
-          </article>
-        </div>
-        <div class="values-col values-col-center">
-          <article class="value-card">
-            <h3>Urukundo n'Impuhwe</h3>
-            <p>Unconditional Christian love and compassion, reaching out especially to the most vulnerable, widows, orphans, and prisoners.</p>
-          </article>
-          <article class="value-card">
-            <h3>Ubumwe n'Ubufatanye</h3>
-            <p>Unity, mutual respect, teamwork, and strong collaborative alliances across communities and civil society organizations.</p>
-          </article>
-        </div>
-        <div class="values-col">
-          <article class="value-card">
-            <h3>Ubunyangamugayo</h3>
-            <p>Uncompromising honesty, moral uprightness, and trustworthy financial and institutional stewardship.</p>
-          </article>
-          <article class="value-card">
-            <h3>Iterambere Rirambye</h3>
-            <p>Sustainable development integrating environmental restoration with economic resilience for enduring community prosperity.</p>
-          </article>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

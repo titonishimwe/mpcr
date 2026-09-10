@@ -1,0 +1,65 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}Account{% endblock %}
+
+{% block content %}
+<section class="dash-panel account-warning">
+  <h2>If someone may know your password</h2>
+  <p>Change it immediately, then sign out other sessions. Do not wait.</p>
+  <a href="{% url 'account_password' %}" class="btn btn-primary">Change password now</a>
+</section>
+
+<section class="dash-panel">
+  <div class="dash-panel-head">
+    <h2>Account information</h2>
+    <a href="{% url 'account_edit' %}">Edit</a>
+  </div>
+  <dl class="account-facts">
+    <div><dt>Username</dt><dd>{{ request.user.username }}</dd></div>
+    <div><dt>Email</dt><dd>{{ request.user.email|default:"Not set" }}</dd></div>
+    <div><dt>First name</dt><dd>{{ request.user.first_name|default:"—" }}</dd></div>
+    <div><dt>Last name</dt><dd>{{ request.user.last_name|default:"—" }}</dd></div>
+    <div><dt>Date joined</dt><dd>{{ request.user.date_joined|date:"d M Y, H:i" }}</dd></div>
+    <div><dt>Last sign-in</dt><dd>{{ request.user.last_login|date:"d M Y, H:i"|default:"—" }}</dd></div>
+    <div><dt>Role</dt><dd>{% if request.user.is_superuser %}Administrator{% else %}Staff{% endif %}</dd></div>
+  </dl>
+  {% if profile.pending_email %}
+    <p class="dash-help">Waiting to confirm {{ profile.pending_email }}. Password recovery still uses your current email.</p>
+  {% endif %}
+  <div class="dash-form-actions">
+    <a href="{% url 'account_email' %}" class="btn btn-outline">Change email</a>
+    <a href="{% url 'account_password' %}" class="btn btn-outline">Change password</a>
+  </div>
+</section>
+
+<section class="dash-panel">
+  <h2>Sessions</h2>
+  <p class="dash-help">This browser stays signed in for 8 hours of activity. Signing out other sessions requires your current password.</p>
+  <form method="post" action="{% url 'account_logout_others' %}" class="dash-inline-form">
+    {% csrf_token %}
+    <input class="form-input" type="password" name="current_password" autocomplete="current-password" placeholder="Current password" required>
+    <button type="submit" class="btn btn-outline">Sign out other sessions</button>
+  </form>
+</section>
+
+<section class="dash-panel">
+  <h2>Security activity</h2>
+  {% if activities %}
+    <ul class="dash-message-list">
+      {% for item in activities %}
+        <li>
+          <span><strong>{{ item.action }}</strong><span>{{ item.created_at|date:"d M Y, H:i" }}</span></span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="dash-empty">No account activity recorded yet.</p>
+  {% endif %}
+</section>
+
+<section class="dash-panel">
+  <h2>Deactivate account</h2>
+  <p class="dash-help">This keeps your records and blocks sign-in. It does not delete the account.</p>
+  <a href="{% url 'account_deactivate' %}" class="dash-danger">Deactivate account</a>
+</section>
+{% endblock %}

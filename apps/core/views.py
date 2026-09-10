@@ -1,15 +1,41 @@
+import logging
+
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse
-from .models import Program, GalleryImage, ImpactStat, Partner, TeamMember
+from .models import (
+    GalleryImage,
+    HeroSlide,
+    ImpactStat,
+    Partner,
+    Program,
+    TeamMember,
+    ensure_cms_defaults,
+    get_page_sections,
+)
 from .forms import ContactForm
+
+logger = logging.getLogger("mpcr")
+
+
+def paginate(request, queryset, per_page):
+    page = Paginator(queryset, per_page).get_page(request.GET.get("page"))
+    params = request.GET.copy()
+    params.pop("page", None)
+    return page, params.urlencode()
 
 
 def home(request):
+    ensure_cms_defaults()
     featured_programs = Program.objects.filter(is_featured=True)[:6]
     preview_gallery = GalleryImage.objects.filter(is_featured=True)[:6]
     team_members = TeamMember.objects.filter(is_active=True)
     partners = Partner.objects.all()
+    hero_slides = list(HeroSlide.objects.filter(is_active=True))
+    if not hero_slides:
+        ensure_cms_defaults()
+        hero_slides = list(HeroSlide.objects.filter(is_active=True))
 
     context = {
         "page_title": "Home - Movement for Christ in Rwanda (MPCR)",
@@ -17,6 +43,8 @@ def home(request):
         "preview_gallery": preview_gallery,
         "team_members": team_members,
         "partners": partners,
+        "cms": get_page_sections("home"),
+        "hero_slides": hero_slides,
     }
     return render(request, "core/home.html", context)
 
@@ -29,6 +57,7 @@ def about(request):
         "page_title": "About Us - Movement for Christ in Rwanda",
         "partners": partners,
         "stats": stats,
+        "cms": get_page_sections("about"),
     }
     return render(request, "core/about.html", context)
 
@@ -41,12 +70,16 @@ def programs(request):
         programs_list = Program.objects.all()
 
     categories = Program.CATEGORY_CHOICES
+    programs_page, pagination_query = paginate(request, programs_list, 6)
 
     context = {
         "page_title": "Our Programs & Activities - MPCR",
-        "programs": programs_list,
+        "programs": programs_page,
+        "page_obj": programs_page,
+        "pagination_query": pagination_query,
         "categories": categories,
         "selected_category": selected_category,
+        "cms": get_page_sections("programs"),
     }
     return render(request, "core/programs.html", context)
 
@@ -59,12 +92,16 @@ def gallery(request):
         photos_list = GalleryImage.objects.all()
 
     categories = GalleryImage.CATEGORY_CHOICES
+    photos_page, pagination_query = paginate(request, photos_list, 9)
 
     context = {
         "page_title": "Activity & Project Gallery - MPCR",
-        "photos": photos_list,
+        "photos": photos_page,
+        "page_obj": photos_page,
+        "pagination_query": pagination_query,
         "categories": categories,
         "selected_category": selected_category,
+        "cms": get_page_sections("gallery"),
     }
     return render(request, "core/gallery.html", context)
 
@@ -90,17 +127,19 @@ def contact(request):
     context = {
         "page_title": "Contact Us - Movement for Christ in Rwanda",
         "form": form,
+        "cms": get_page_sections("contact"),
     }
     return render(request, "core/contact.html", context)
 
 
 def custom_page_not_found(request, exception=None):
-    return render(request, "404.html", {"page_title": "Page Not Found - MPCR"}, status=404)
+    return render(request, "404.html", {"page_title": "Page Not Found"}, status=404)
 
 
 def custom_server_error(request):
-    return render(request, "500.html", {"page_title": "Server Error - MPCR"}, status=500)
+    logger.error("Server error while handling %s", request.path)
+    return render(request, "500.html", {"page_title": "Server Error"}, status=500)
 
 
 def custom_permission_denied(request, exception=None):
-    return render(request, "403.html", {"page_title": "Access Denied - MPCR"}, status=403)
+    return render(request, "403.html", {"page_title": "Access Denied"}, status=403)

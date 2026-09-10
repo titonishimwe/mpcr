@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Server Error (500) - MPCR{% endblock %}
+{% block title %}Server Error{% endblock %}
 
 {% block content %}
 <section class="error-page-section">
   <div class="container">
-    <div class="error-code" style="color: #DC2626;">500</div>
-    <h1 class="error-title">Something Went Wrong</h1>
+    <h1 class="error-code">500</h1>
+    <h2 class="error-title">Something Went Wrong</h2>
     <p class="error-desc">
-      We encountered an internal server error while processing your request. Our technical team has been notified. Please try again in a few moments.
+      We are unable to process your request right now.
+      Please try again later.
     </p>
-    <a href="{% url 'home' %}" class="btn btn-primary">
-      <i class="fas fa-home"></i> Return Home
-    </a>
+    <a href="{% url 'home' %}" class="btn btn-primary">Return Home</a>
   </div>
 </section>
 {% endblock %}

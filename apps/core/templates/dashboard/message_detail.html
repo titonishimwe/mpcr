@@ -1,0 +1,24 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}{{ message_obj.subject }}{% endblock %}
+
+{% block content %}
+<section class="dash-panel dash-message">
+  <p><strong>{{ message_obj.name }}</strong> · {{ message_obj.email }}{% if message_obj.phone %} · {{ message_obj.phone }}{% endif %}</p>
+  <p class="dash-help">{{ message_obj.created_at|date:"d M Y, H:i" }}</p>
+  <div class="dash-message-body">{{ message_obj.message|linebreaks }}</div>
+  <div class="dash-form-actions">
+    <a href="{% url 'dashboard_messages' %}" class="btn btn-outline">Back</a>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="toggle">
+      <button type="submit" class="btn btn-outline">{% if message_obj.is_read %}Mark unread{% else %}Mark read{% endif %}</button>
+    </form>
+    <form method="post" onsubmit="return confirm('Delete this message?');">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="delete">
+      <button type="submit" class="btn btn-outline dash-danger">Delete</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

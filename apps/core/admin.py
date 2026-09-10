@@ -1,10 +1,40 @@
 from django.contrib import admin
-from .models import Program, GalleryImage, ContactMessage, ImpactStat, Partner, TeamMember, Testimonial
+from .models import (
+    Program,
+    GalleryImage,
+    ContactMessage,
+    ImpactStat,
+    Partner,
+    TeamMember,
+    Testimonial,
+    SiteSettings,
+    PageSection,
+    HeroSlide,
+)
 
 # Customize Admin Site Branding
 admin.site.site_header = "MPCR Administration - Movement for Christ in Rwanda"
 admin.site.site_title = "MPCR Portal"
 admin.site.index_title = "NGO Content & Communications Management"
+
+
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    list_display = ["org_name", "email_primary", "phone_primary", "updated_at"]
+
+
+@admin.register(PageSection)
+class PageSectionAdmin(admin.ModelAdmin):
+    list_display = ["page", "label", "key", "field_type", "order"]
+    list_filter = ["page", "field_type"]
+    search_fields = ["key", "label", "value"]
+    list_editable = ["order"]
+
+
+@admin.register(HeroSlide)
+class HeroSlideAdmin(admin.ModelAdmin):
+    list_display = ["title", "order", "is_active"]
+    list_editable = ["order", "is_active"]
 
 
 @admin.register(Program)

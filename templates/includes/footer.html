@@ -1,19 +1,18 @@
 {% load static %}
 <footer class="footer">
   <div class="container">
+    {% if site %}
     <div class="footer-grid">
-      <!-- Col 1: Identity & Legal -->
       <div class="footer-brand">
-        <img src="{% static 'images/logo.png' %}" alt="MPCR Logo">
-        <p class="footer-about">
-          <strong>Movement for Christ in Rwanda (MPCR)</strong> is a faith-based non-governmental organization committed to transforming communities through the Gospel, holistic health, sustainable landscape restoration, and economic self-reliance.
-        </p>
-        <span class="footer-legal-badge">
-          <i class="fas fa-certificate"></i> Legal Personality Compliance No. 166/2023 • Law No. 06/2012
-        </span>
+        <img src="{% static 'images/logo.png' %}" alt="{{ site.org_name|default:'MPCR' }} Logo">
+        <p class="footer-about">{{ site.footer_about }}</p>
+        {% if site.legal_badge %}
+          <span class="footer-legal-badge">
+            <i class="fas fa-certificate"></i> {{ site.legal_badge }}
+          </span>
+        {% endif %}
       </div>
 
-      <!-- Col 2: Navigation Links -->
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul class="footer-links">
@@ -22,63 +21,62 @@
           <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Our Programs</a></li>
           <li><a href="{% url 'gallery' %}"><i class="fas fa-chevron-right"></i> Photo Gallery</a></li>
           <li><a href="{% url 'contact' %}"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
-          <li><a href="/admin/" target="_blank" rel="noopener noreferrer"><i class="fas fa-lock"></i> Staff Portal</a></li>
+          <li><a href="{% url 'dashboard_login' %}"><i class="fas fa-lock"></i> Staff Portal</a></li>
         </ul>
       </div>
 
-      <!-- Col 3: Key Programs -->
       <div class="footer-col">
         <h4>Our Focus</h4>
         <ul class="footer-links">
-          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Evangelism</a></li>
-          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Social (well being)</a></li>
-          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Economic</a></li>
-          <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Development</a></li>
+          {% for item in site.focus_list %}
+            <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> {{ item }}</a></li>
+          {% empty %}
+            <li><a href="{% url 'programs' %}"><i class="fas fa-chevron-right"></i> Evangelism</a></li>
+          {% endfor %}
         </ul>
       </div>
 
-      <!-- Col 4: Contact & Channels -->
       <div class="footer-col">
         <h4>Headquarters</h4>
         <ul class="footer-links">
           <li>
             <i class="fas fa-map-marker-alt" style="color: var(--accent-gold-light);"></i>
-            <span>Nyamirambo Sector, Nyarugenge District, Kigali City, Rwanda</span>
+            <span>{{ site.address_line_1 }}{% if site.address_line_2 %}, {{ site.address_line_2 }}{% endif %}</span>
           </li>
-          <li>
-            <a href="tel:+250788812075"><i class="fas fa-phone-alt"></i> (+250) 788 812 075</a>
-          </li>
-          <li>
-            <a href="tel:+250788436988"><i class="fas fa-phone-alt"></i> (+250) 788 436 988</a>
-          </li>
-          <li>
-            <a href="mailto:info@mouvementpourchriste.org"><i class="fas fa-envelope"></i> info@mouvementpourchriste.org</a>
-          </li>
-          <li>
-            <a href="mailto:mchriste1992@gmail.com"><i class="fas fa-envelope-open-text"></i> mchriste1992@gmail.com</a>
-          </li>
+          {% if site.phone_primary %}
+            <li><a href="tel:{{ site.phone_primary_raw }}"><i class="fas fa-phone-alt"></i> {{ site.phone_primary }}</a></li>
+          {% endif %}
+          {% if site.phone_secondary %}
+            <li><a href="tel:{{ site.phone_secondary_raw }}"><i class="fas fa-phone-alt"></i> {{ site.phone_secondary }}</a></li>
+          {% endif %}
+          {% if site.email_primary %}
+            <li><a href="mailto:{{ site.email_primary }}"><i class="fas fa-envelope"></i> {{ site.email_primary }}</a></li>
+          {% endif %}
+          {% if site.email_secondary %}
+            <li><a href="mailto:{{ site.email_secondary }}"><i class="fas fa-envelope-open-text"></i> {{ site.email_secondary }}</a></li>
+          {% endif %}
         </ul>
         <div class="footer-social-links">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook (@mpcr1990)">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram (@mpcr1990)">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Twitter / X (@mpcr1990)">
-            <i class="fab fa-x-twitter"></i>
-          </a>
-          <a href="https://wa.me/250788812075" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp Contact">
-            <i class="fab fa-whatsapp"></i>
-          </a>
+          {% if site.facebook_url %}
+            <a href="{{ site.facebook_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook {{ site.social_handle }}"><i class="fab fa-facebook-f"></i></a>
+          {% endif %}
+          {% if site.instagram_url %}
+            <a href="{{ site.instagram_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram {{ site.social_handle }}"><i class="fab fa-instagram"></i></a>
+          {% endif %}
+          {% if site.twitter_url %}
+            <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Twitter / X {{ site.social_handle }}"><i class="fab fa-x-twitter"></i></a>
+          {% endif %}
+          {% if site.whatsapp_url %}
+            <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="WhatsApp Contact"><i class="fab fa-whatsapp"></i></a>
+          {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- Bottom Copyright -->
     <div class="footer-bottom">
-      <p>&copy; 2026 Movement for Christ in Rwanda (MPCR) / Mouvement Pour Christ au Rwanda. All rights reserved.</p>
-      <p><em>"A healthy spirit lives in a healthy body" — Roho nzima itura mu mubiri muzima</em></p>
+      <p>{{ site.footer_copyright }}</p>
+      <p><em>{{ site.footer_tagline }}</em></p>
     </div>
+    {% endif %}
   </div>
 </footer>

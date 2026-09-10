@@ -1,0 +1,67 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}{{ config.title }}{% endblock %}
+
+{% block content %}
+<section class="dash-toolbar">
+  <form method="get" class="dash-search">
+    <input class="form-input" type="search" name="q" value="{{ query }}" placeholder="Search {{ config.title|lower }}">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <a href="{% url 'dashboard_create' resource=resource %}" class="btn btn-primary">Add {{ config.singular }}</a>
+</section>
+
+<section class="dash-panel">
+  {% if rows %}
+    <div class="dash-table-wrap">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            {% for _attr, label in config.columns %}
+              <th>{{ label }}</th>
+            {% endfor %}
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for obj, values in rows %}
+            <tr>
+              {% for value in values %}
+                <td>
+                  {% if value is True %}
+                    Yes
+                  {% elif value is False %}
+                    No
+                  {% else %}
+                    {{ value|default:"—" }}
+                  {% endif %}
+                </td>
+              {% endfor %}
+              <td class="dash-actions">
+                <a href="{% url 'dashboard_edit' resource=resource pk=obj.pk %}">Edit</a>
+                <form method="post" action="{% url 'dashboard_delete' resource=resource pk=obj.pk %}" onsubmit="return confirm('Delete this {{ config.singular }}?');">
+                  {% csrf_token %}
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if page_obj.paginator.num_pages > 1 %}
+      <nav class="dash-pager" aria-label="Pages">
+        {% if page_obj.has_previous %}
+          <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?q={{ query }}&page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p class="dash-empty">No {{ config.title|lower }} yet.</p>
+  {% endif %}
+</section>
+{% endblock %}

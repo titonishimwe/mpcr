@@ -4,11 +4,10 @@
 {% block title %}Our Programs & Activities - Movement for Christ in Rwanda (MPCR){% endblock %}
 
 {% block content %}
-<!-- Page Header Banner -->
 <section class="programs-page-banner">
   <div class="container">
-    <h1>Our Programs</h1>
-    <p>Comprehensive Interventions Empowering Rwandan Communities in Spirit, Mind, and Livelihood</p>
+    <h1>{{ cms.banner_title.value }}</h1>
+    <p>{{ cms.banner_text.value }}</p>
     <nav class="programs-breadcrumb" aria-label="Breadcrumb">
       <a href="{% url 'home' %}">Home</a>
       <span>&gt;</span>
@@ -17,15 +16,12 @@
   </div>
 </section>
 
-<!-- Six Pillars -->
 <section class="pillars-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Integrated Action</span>
-      <h2 class="section-title">Community Transformation</h2>
-      <p class="section-subtitle">
-        MPCR designs and implements initiatives that meet urgent grassroots needs while building long-term community self-reliance.
-      </p>
+      <span class="section-badge">{{ cms.section_badge.value }}</span>
+      <h2 class="section-title">{{ cms.section_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.section_subtitle.value }}</p>
     </div>
 
     <div class="pillar-list">
@@ -58,44 +54,38 @@
         <p class="section-subtitle">No programs found under this category.</p>
       {% endfor %}
     </div>
+    {% include "includes/pagination.html" %}
   </div>
 </section>
 
-<!-- Methodological Strategies & Target Groups -->
 <section style="padding: 5rem 0; background: var(--bg-main);">
   <div class="container">
     <div class="section-header">
-      <span class="section-badge">Implementation Framework</span>
-      <h2 class="section-title">Strategies & Target Beneficiaries</h2>
-      <p class="section-subtitle">
-        How MPCR drives sustainable grassroots mobilization and lasting community ownership.
-      </p>
+      <span class="section-badge">{{ cms.framework_badge.value }}</span>
+      <h2 class="section-title">{{ cms.framework_title.value }}</h2>
+      <p class="section-subtitle">{{ cms.framework_subtitle.value }}</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+    <div class="two-col-grid" style="gap: 3rem;">
       <div style="background: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-          <i class="fas fa-cogs" style="color: var(--accent-green);"></i> Core Delivery Strategies
+          <i class="fas fa-cogs" style="color: var(--accent-green);"></i> {{ cms.strategies_title.value }}
         </h3>
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-muted); font-size: 0.95rem;">
-          <li><i class="fas fa-film" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Christian Cinema & Road Shows:</strong> Mobile open-air screenings conveying gospel truths and public health messages.</li>
-          <li><i class="fas fa-bullhorn" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Evangelization Campaigns:</strong> Intensive community preaching, revival seminars, and youth fellowship rallies.</li>
-          <li><i class="fas fa-hands-helping" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Lobby & Advocacy:</strong> Defending the rights of women, child protection, and land restoration compliance.</li>
-          <li><i class="fas fa-chalkboard-teacher" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Capacity Building:</strong> Training Child Protection Committees (CPCs), gender counselors, and farmer facilitators.</li>
-          <li><i class="fas fa-seedling" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>Decentralized Nurseries:</strong> Producing quality agroforestry and fruit seedlings directly within intervention sectors.</li>
+          {% for title, detail in cms.strategies.pairs %}
+            <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i> <strong>{{ title }}</strong> {{ detail }}</li>
+          {% endfor %}
         </ul>
       </div>
 
       <div style="background: #ffffff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 2.5rem; box-shadow: var(--shadow-sm);">
         <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-          <i class="fas fa-users" style="color: var(--accent-green);"></i> Priority Target Beneficiaries
+          <i class="fas fa-users" style="color: var(--accent-green);"></i> {{ cms.beneficiaries_title.value }}
         </h3>
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.85rem; color: var(--text-muted); font-size: 0.95rem;">
-          <li><i class="fas fa-church" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Churches & Congregations:</strong> Equipping pastors, Sunday school teachers, and faith youth leaders.</li>
-          <li><i class="fas fa-child" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Children & University Students:</strong> Fostering child protection, scholarships, and Christian values.</li>
-          <li><i class="fas fa-female" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Women & Widows:</strong> Income-generating cooperatives, livestock incentives, and cookstoves.</li>
-          <li><i class="fas fa-user-shield" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Prisoners, Refugees & Informal Couples:</strong> Pastoral reconciliation, counseling, and social reintegration.</li>
-          <li><i class="fas fa-tractor" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>Smallholder Farmers & Cooperatives:</strong> Training champion farmers in tree maintenance, soil care, and agroforestry.</li>
+          {% for title, detail in cms.beneficiaries.pairs %}
+            <li><i class="fas fa-check" style="color: var(--accent-green); margin-right: 0.5rem;"></i> <strong>{{ title }}</strong> {{ detail }}</li>
+          {% endfor %}
         </ul>
       </div>
     </div>

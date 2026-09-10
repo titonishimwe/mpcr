@@ -12,7 +12,7 @@ class Command(BaseCommand):
         programs_data = [
             {
                 "title": "Strengthening Climate Change Adaptation Capacity for Poor and Vulnerable Households in Gatsibo District",
-                "category": "flr",
+                "category": "development",
                 "summary": "Building the capacity of poor and vulnerable households in Gatsibo District to adapt to climate change and protect their livelihoods.",
                 "description": (
                     "The project strengthens climate change adaptation among poor and vulnerable households in Gatsibo District. "
@@ -29,7 +29,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Single Stream Funding (SSF/VIH) for HIV/AIDS in Nyanza District",
-                "category": "health",
+                "category": "social",
                 "summary": "HIV/AIDS response in Nyanza District, financed by the Global Fund through Single Stream Funding (SSF/VIH).",
                 "description": (
                     "Single Stream Funding (SSF/VIH) supports HIV/AIDS services in Nyanza District. "
@@ -46,7 +46,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Professional Training in Carpentry, Gatsibo District",
-                "category": "education",
+                "category": "development",
                 "summary": "Professional carpentry training in Gatsibo District under project 7F-01352.11.01, financed by the Embassy of Switzerland.",
                 "description": (
                     "Project 7F-01352.11.01 provides professional training, specifically in carpentry, in Gatsibo District. "
@@ -63,7 +63,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Scaling Up Access to HIV/AIDS Prevention Services in Rwanda",
-                "category": "health",
+                "category": "social",
                 "summary": "Scaling up access to HIV/AIDS prevention services in Rwanda, financed by the Global Fund (R6 / VIII/R6).",
                 "description": (
                     "The project scales up access to HIV/AIDS prevention services in Rwanda. "
@@ -80,7 +80,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Adopting Agroforestry for Land Restoration, Sustainable Livelihoods and Community Well-being in Rutsiro District",
-                "category": "flr",
+                "category": "development",
                 "summary": "Agroforestry for land restoration, sustainable livelihoods, and community well-being in Rutsiro District, Western Province. Financed by Vumbuzi Impact Africa Foundation (VIA) in partnership with TerraFund and the World Resources Institute (WRI).",
                 "description": (
                     "The project adopts agroforestry for land restoration, sustainable livelihoods, and community well-being in Rutsiro District, Western Province. "
@@ -166,7 +166,7 @@ class Command(BaseCommand):
         gallery_data = [
             {
                 "title": "Central Tree Nursery Operation",
-                "category": "flr",
+                "category": "development",
                 "caption": "Project nursery beds producing Grevillea, Eucalyptus, Avocado, Tree Tomatoes, and Papaya seedlings for 105 ha landscape restoration.",
                 "image_url": "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=800&q=80",
                 "location": "Kabarore Sector, Gatsibo District",
@@ -175,7 +175,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Grevillea Agroforestry in Cropland",
-                "category": "flr",
+                "category": "development",
                 "caption": "Successful integration of Grevillea robusta in agricultural cropland at 5m spacing, improving microclimate and soil moisture retention.",
                 "image_url": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80",
                 "location": "Nyabikiri Cell, Gatsibo District",
@@ -184,7 +184,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Restored Eucalyptus Woodlot Plantation",
-                "category": "flr",
+                "category": "development",
                 "caption": "Rehabilitated woodlot plot restored with healthy Eucalyptus trees planted at 2.5m x 2m spacing for sustainable timber and carbon capture.",
                 "image_url": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80",
                 "location": "Nyabikiri Cell, Gatsibo District",
@@ -193,7 +193,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Champion Farmers with Papaya Harvest",
-                "category": "flr",
+                "category": "development",
                 "caption": "Beneficiary champion farmers holding ripe, homegrown papayas produced from project nursery fruit tree seedlings.",
                 "image_url": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80",
                 "location": "Nyabikiri Cell, Gatsibo District",
@@ -202,7 +202,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "On-Site Seedling Distribution to Community",
-                "category": "community",
+                "category": "social",
                 "caption": "Community gathering in Kabarore Sector receiving seedlings, tools, and technical coaching for home plot planting.",
                 "image_url": "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80",
                 "location": "Kabarore Sector, Gatsibo District",
@@ -211,7 +211,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Livestock & Goat Incentive Award Scheme",
-                "category": "community",
+                "category": "social",
                 "caption": "Small ruminants (goats) and improved cookstoves delivered to 150 champion farmers who achieved top seedling survival rates.",
                 "image_url": "https://images.unsplash.com/photo-1524024973431-2ad916746881?auto=format&fit=crop&w=800&q=80",
                 "location": "Gatsibo & Kamonyi Districts",
@@ -220,7 +220,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Higher Education Sponsorship ULK Graduation",
-                "category": "education",
+                "category": "development",
                 "caption": "Celebration of MPCR sponsored students Gildas Niyonzima and John Bosco Nkusi graduating from Kigali Independent University (ULK).",
                 "image_url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
                 "location": "ULK Kigali Campus",
@@ -229,7 +229,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Youth HIV/AIDS Awareness & Health Training",
-                "category": "health",
+                "category": "social",
                 "caption": "Community health facilitator Celine Mukeshimana conducting basic education on epidemic diseases and HIV prevention for youth.",
                 "image_url": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80",
                 "location": "Muyira Center, Nyanza District",
@@ -238,7 +238,7 @@ class Command(BaseCommand):
             },
             {
                 "title": "Donor Monitoring Visit by Prof. Jean Nduwamungu",
-                "category": "leadership",
+                "category": "evangelism",
                 "caption": "Donor representative Prof. Jean Nduwamungu inspecting restored agroforestry farmlands and consulting with local champion farmers.",
                 "image_url": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
                 "location": "Nyabikiri Cell, Gatsibo District",

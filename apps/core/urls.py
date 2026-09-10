@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import account_views, cms_views, dashboard_views, views
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -7,4 +7,31 @@ urlpatterns = [
     path("programs/", views.programs, name="programs"),
     path("gallery/", views.gallery, name="gallery"),
     path("contact/", views.contact, name="contact"),
+    path("dashboard/login/", dashboard_views.dashboard_login, name="dashboard_login"),
+    path("dashboard/logout/", dashboard_views.dashboard_logout, name="dashboard_logout"),
+    path("dashboard/password-reset/", account_views.DashboardPasswordResetView.as_view(), name="password_reset"),
+    path("dashboard/password-reset/sent/", account_views.DashboardPasswordResetDoneView.as_view(), name="password_reset_done"),
+    path("dashboard/password-reset/<uidb64>/<token>/", account_views.DashboardPasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("dashboard/password-reset/complete/", account_views.DashboardPasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path("dashboard/account/", account_views.account_view, name="account"),
+    path("dashboard/account/edit/", account_views.account_edit, name="account_edit"),
+    path("dashboard/account/email/", account_views.account_email, name="account_email"),
+    path("dashboard/account/email/confirm/<str:token>/", account_views.account_email_confirm, name="account_email_confirm"),
+    path("dashboard/account/password/", account_views.account_password, name="account_password"),
+    path("dashboard/account/sessions/", account_views.account_logout_others, name="account_logout_others"),
+    path("dashboard/account/deactivate/", account_views.account_deactivate, name="account_deactivate"),
+    path("dashboard/content/", cms_views.cms_home, name="cms_home"),
+    path("dashboard/content/site/", cms_views.cms_site_settings, name="cms_site_settings"),
+    path("dashboard/content/hero/", cms_views.cms_hero_list, name="cms_hero_list"),
+    path("dashboard/content/hero/new/", cms_views.cms_hero_create, name="cms_hero_create"),
+    path("dashboard/content/hero/<int:pk>/edit/", cms_views.cms_hero_edit, name="cms_hero_edit"),
+    path("dashboard/content/hero/<int:pk>/delete/", cms_views.cms_hero_delete, name="cms_hero_delete"),
+    path("dashboard/content/pages/<str:page>/", cms_views.cms_page_edit, name="cms_page_edit"),
+    path("dashboard/", dashboard_views.dashboard_home, name="dashboard"),
+    path("dashboard/messages/", dashboard_views.message_list, name="dashboard_messages"),
+    path("dashboard/messages/<int:pk>/", dashboard_views.message_detail, name="dashboard_message"),
+    path("dashboard/<str:resource>/", dashboard_views.resource_list, name="dashboard_list"),
+    path("dashboard/<str:resource>/new/", dashboard_views.resource_create, name="dashboard_create"),
+    path("dashboard/<str:resource>/<int:pk>/edit/", dashboard_views.resource_edit, name="dashboard_edit"),
+    path("dashboard/<str:resource>/<int:pk>/delete/", dashboard_views.resource_delete, name="dashboard_delete"),
 ]

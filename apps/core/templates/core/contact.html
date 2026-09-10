@@ -4,111 +4,114 @@
 {% block title %}Contact Us - Movement for Christ in Rwanda (MPCR){% endblock %}
 
 {% block content %}
-<!-- Page Header Banner -->
 <section class="page-banner">
   <div class="container">
-    <span class="section-badge">Get in Touch</span>
-    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">Contact MPCR</h1>
-    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">
-      We welcome inquiries, partnership proposals, church collaboration, prayer requests, and community support. Reach out to our coordination team.
-    </p>
+    <span class="section-badge">{{ cms.banner_badge.value }}</span>
+    <h1 style="font-size: 2.85rem; font-weight: 900; margin-bottom: 0.75rem;">{{ cms.banner_title.value }}</h1>
+    <p style="font-size: 1.15rem; color: #CBD5E1; max-width: 760px;">{{ cms.banner_text.value }}</p>
   </div>
 </section>
 
-<!-- Contact Form & Info Grid -->
 <section class="contact-section">
   <div class="container">
     <div class="contact-grid">
-      <!-- Left Column: Contact Channels -->
       <div class="contact-info-panel">
         <div>
-          <span class="section-badge">Headquarters & Contacts</span>
+          <span class="section-badge">{{ cms.intro_badge.value }}</span>
           <h2 style="font-size: 2rem; font-weight: 800; color: var(--primary-navy); margin-bottom: 1rem;">
-            Let's Start a Conversation
+            {{ cms.intro_title.value }}
           </h2>
           <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem;">
-            Our national secretariat in Kigali coordinates operations across all districts. Feel free to reach out via phone, email, WhatsApp, or through our contact form.
+            {{ cms.intro_text.value }}
           </p>
         </div>
 
-        <!-- Physical Address -->
         <div class="contact-card">
           <div class="contact-card-icon">
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="contact-card-content">
             <h4>Head Office Address</h4>
-            <p>Kigali City, Nyarugenge District</p>
-            <p>Nyamirambo Sector, Rwanda</p>
-            <p style="font-size: 0.85rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem;">P.O. Box 1959, Kigali, Rwanda</p>
+            <p>{{ site.address_line_1 }}</p>
+            <p>{{ site.address_line_2 }}</p>
+            {% if site.postal_box %}
+              <p style="font-size: 0.85rem; color: var(--accent-green); font-weight: 600; margin-top: 0.25rem;">{{ site.postal_box }}</p>
+            {% endif %}
           </div>
         </div>
 
-        <!-- Phone Lines -->
         <div class="contact-card">
           <div class="contact-card-icon">
             <i class="fas fa-phone-alt"></i>
           </div>
           <div class="contact-card-content">
             <h4>Phone Inquiries</h4>
-            <p><a href="tel:+250788812075"><i class="fas fa-phone"></i> (+250) 788 812 075</a></p>
-            <p><a href="tel:+250788436988"><i class="fas fa-phone"></i> (+250) 788 436 988</a></p>
-            <small style="color: var(--text-light);">Available Monday – Friday: 8:00 AM – 5:00 PM CAT</small>
+            {% if site.phone_primary %}
+              <p><a href="tel:{{ site.phone_primary_raw }}"><i class="fas fa-phone"></i> {{ site.phone_primary }}</a></p>
+            {% endif %}
+            {% if site.phone_secondary %}
+              <p><a href="tel:{{ site.phone_secondary_raw }}"><i class="fas fa-phone"></i> {{ site.phone_secondary }}</a></p>
+            {% endif %}
+            <small style="color: var(--text-light);">{{ cms.hours_text.value }}</small>
           </div>
         </div>
 
-        <!-- Emails -->
         <div class="contact-card">
           <div class="contact-card-icon">
             <i class="fas fa-envelope-open-text"></i>
           </div>
           <div class="contact-card-content">
             <h4>Email Communications</h4>
-            <p><a href="mailto:info@mouvementpourchriste.org">info@mouvementpourchriste.org</a></p>
-            <p><a href="mailto:mchriste1992@gmail.com">mchriste1992@gmail.com</a></p>
+            {% if site.email_primary %}
+              <p><a href="mailto:{{ site.email_primary }}">{{ site.email_primary }}</a></p>
+            {% endif %}
+            {% if site.email_secondary %}
+              <p><a href="mailto:{{ site.email_secondary }}">{{ site.email_secondary }}</a></p>
+            {% endif %}
           </div>
         </div>
 
-        <!-- Direct WhatsApp Action -->
-        <div class="contact-card" style="border-color: #25D366; background: #F0FDF4;">
-          <div class="contact-card-icon" style="background: #25D366; color: #fff;">
-            <i class="fab fa-whatsapp"></i>
+        {% if site.whatsapp_url %}
+          <div class="contact-card" style="border-color: #25D366; background: #F0FDF4;">
+            <div class="contact-card-icon" style="background: #25D366; color: #fff;">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-card-content">
+              <h4>Instant WhatsApp Message</h4>
+              <p>Connect immediately with our team via WhatsApp.</p>
+              <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="margin-top: 0.75rem; padding: 0.5rem 1rem; font-size: 0.85rem;">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp {% if site.phone_primary %}({{ site.phone_primary }}){% endif %}
+              </a>
+            </div>
           </div>
-          <div class="contact-card-content">
-            <h4>Instant WhatsApp Message</h4>
-            <p>Connect immediately with our team via WhatsApp.</p>
-            <a href="https://wa.me/250788812075?text=Hello%20MPCR%20Team%2C%20I%20am%20reaching%20out%20via%20the%20website." 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               class="btn btn-whatsapp" 
-               style="margin-top: 0.75rem; padding: 0.5rem 1rem; font-size: 0.85rem;">
-              <i class="fab fa-whatsapp"></i> Chat on WhatsApp (+250 788 812 075)
-            </a>
-          </div>
-        </div>
+        {% endif %}
 
-        <!-- Social Media Channels -->
         <div style="margin-top: 0.5rem;">
-          <h5 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.75rem;">Follow Our Official Handles (@mpcr1990)</h5>
+          <h5 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.75rem;">Follow Our Official Handles {% if site.social_handle %}({{ site.social_handle }}){% endif %}</h5>
           <div style="display: flex; gap: 0.75rem;">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="Facebook">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="X / Twitter">
-              <i class="fab fa-x-twitter"></i>
-            </a>
+            {% if site.facebook_url %}
+              <a href="{{ site.facebook_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            {% endif %}
+            {% if site.instagram_url %}
+              <a href="{{ site.instagram_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            {% endif %}
+            {% if site.twitter_url %}
+              <a href="{{ site.twitter_url }}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" style="background: #e2e8f0; color: var(--primary-navy);" aria-label="X / Twitter">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Interactive Contact Form -->
       <div>
         <div class="contact-form-card">
-          <h3>Send Us a Message</h3>
-          <p>Fill out the form below and we will get back to you promptly.</p>
+          <h3>{{ cms.form_title.value }}</h3>
+          <p>{{ cms.form_text.value }}</p>
 
           <form method="post" action="{% url 'contact' %}" novalidate>
             {% csrf_token %}
@@ -167,7 +170,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 {% endblock %}

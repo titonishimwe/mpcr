@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body class="dash-body">
+  <main class="dash-login">
+    <section class="dash-login-card">
+      <img src="{% static 'images/logo.png' %}" alt="MPCR">
+      <h1>Admin sign in</h1>
+      <p>Sign in to manage programs, gallery, team, partners, and messages.</p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags|default:'info' }}" role="alert">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-error" role="alert">
+            <span>{{ form.non_field_errors|striptags }}</span>
+          </div>
+        {% endif %}
+        <div class="form-group">
+          <label for="id_username">Username</label>
+          <input class="form-input" type="text" name="username" id="id_username" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label for="id_password">Password</label>
+          <input class="form-input" type="password" name="password" id="id_password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary dash-submit">Sign in</button>
+      </form>
+      <a href="{% url 'password_reset' %}" class="dash-back">Forgot password?</a>
+      <a href="{% url 'home' %}" class="dash-back">Back to the website</a>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "dashboard/base.html" %}
+
+{% block heading %}Messages{% endblock %}
+
+{% block content %}
+<section class="dash-toolbar">
+  <form method="get" class="dash-search">
+    <input class="form-input" type="search" name="q" value="{{ query }}" placeholder="Search messages">
+    <select class="form-input" name="status">
+      <option value="all" {% if status == "all" %}selected{% endif %}>All</option>
+      <option value="unread" {% if status == "unread" %}selected{% endif %}>Unread</option>
+      <option value="read" {% if status == "read" %}selected{% endif %}>Read</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+  </form>
+</section>
+
+<section class="dash-panel">
+  {% if page_obj.object_list %}
+    <ul class="dash-message-list">
+      {% for item in page_obj %}
+        <li>
+          <a href="{% url 'dashboard_message' pk=item.pk %}">
+            <strong>{{ item.subject }}</strong>
+            <span>{{ item.name }} · {{ item.email }} · {{ item.created_at|date:"d M Y, H:i" }}</span>
+          </a>
+          {% if not item.is_read %}<em>New</em>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    {% if page_obj.paginator.num_pages > 1 %}
+      <nav class="dash-pager" aria-label="Pages">
+        {% if page_obj.has_previous %}
+          <a href="?q={{ query }}&status={{ status }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+          <a href="?q={{ query }}&status={{ status }}&page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p class="dash-empty">No messages found.</p>
+  {% endif %}
+</section>
+{% endblock %}

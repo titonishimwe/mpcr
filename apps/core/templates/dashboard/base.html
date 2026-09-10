@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ page_title|default:"Dashboard - MPCR" }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body class="dash-body">
+  <div class="dash-shell">
+    <aside class="dash-sidebar">
+      <a href="{% url 'dashboard' %}" class="dash-brand">
+        <img src="{% static 'images/logo.png' %}" alt="MPCR">
+        <span>Admin</span>
+      </a>
+      <nav class="dash-nav" aria-label="Dashboard">
+        <a href="{% url 'dashboard' %}" class="dash-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+          <i class="fas fa-gauge"></i> Overview
+        </a>
+        {% for key, label, icon in nav_sections %}
+          <a href="{% if key == 'messages' %}{% url 'dashboard_messages' %}{% elif key == 'cms' %}{% url 'cms_home' %}{% else %}{% url 'dashboard_list' resource=key %}{% endif %}" class="dash-link {% if resource == key %}active{% endif %}">
+            <i class="fas {{ icon }}"></i> {{ label }}
+            {% if key == 'messages' and unread_messages %}
+              <span class="dash-count">{{ unread_messages }}</span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </nav>
+      <div class="dash-sidebar-foot">
+        <a href="{% url 'account' %}" class="dash-link {% if resource == 'account' %}active{% endif %}"><i class="fas fa-user-shield"></i> Account</a>
+        <a href="{% url 'home' %}" class="dash-link"><i class="fas fa-arrow-up-right-from-square"></i> View site</a>
+      </div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div>
+          <p class="dash-kicker">MPCR administration</p>
+          <h1>{% block heading %}Dashboard{% endblock %}</h1>
+        </div>
+        <div class="dash-user">
+          <span>{{ request.user.get_full_name|default:request.user.username }}</span>
+          <form method="post" action="{% url 'dashboard_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline dash-signout">Sign out</button>
+          </form>
+        </div>
+      </header>
+
+      {% if messages %}
+        <div class="dash-alerts">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }}" role="alert">
+              <span>{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="dash-content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

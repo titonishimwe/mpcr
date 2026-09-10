@@ -1,0 +1,57 @@
+{% extends "dashboard/base.html" %}
+{% load cms_tags %}
+
+{% block heading %}Hero slides{% endblock %}
+
+{% block content %}
+<section class="dash-toolbar">
+  <p class="dash-help">These images rotate behind the home page hero text.</p>
+  <a href="{% url 'cms_hero_create' %}" class="btn btn-primary">Add slide</a>
+</section>
+
+<section class="dash-panel">
+  {% if slides %}
+    <div class="dash-table-wrap">
+      <table class="dash-table">
+        <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Title</th>
+            <th>Order</th>
+            <th>Active</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for slide in slides %}
+            <tr>
+              <td>
+                {% if slide.media_url %}
+                  <img src="{{ slide.media_url|cms_media }}" alt="" style="width:96px;height:56px;object-fit:cover;border-radius:6px;">
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+              <td>{{ slide.title|default:"Untitled" }}</td>
+              <td>{{ slide.order }}</td>
+              <td>{% if slide.is_active %}Yes{% else %}No{% endif %}</td>
+              <td class="dash-actions">
+                <a href="{% url 'cms_hero_edit' pk=slide.pk %}">Edit</a>
+                <form method="post" action="{% url 'cms_hero_delete' pk=slide.pk %}" onsubmit="return confirm('Delete this slide?');">
+                  {% csrf_token %}
+                  <button type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="dash-empty">No hero slides yet.</p>
+  {% endif %}
+  <div class="dash-form-actions" style="margin-top:1rem;">
+    <a href="{% url 'cms_home' %}" class="btn btn-outline">Back</a>
+  </div>
+</section>
+{% endblock %}

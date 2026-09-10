@@ -1,0 +1,436 @@
+.dash-body {
+  background: #f4f7f5;
+  min-height: 100vh;
+}
+
+.dash-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.dash-sidebar {
+  background: #14532d;
+  color: #ecfdf3;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dash-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fff;
+  font-weight: 800;
+}
+
+.dash-brand img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.dash-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dash-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #d1fae5;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.dash-link:hover,
+.dash-link.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.dash-count {
+  margin-left: auto;
+  background: #f59e0b;
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  min-width: 1.3rem;
+  text-align: center;
+  padding: 0.05rem 0.35rem;
+}
+
+.dash-sidebar-foot {
+  margin-top: auto;
+}
+
+.dash-main {
+  min-width: 0;
+  padding: 1.5rem 1.75rem 2.5rem;
+}
+
+.dash-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.dash-topbar h1 {
+  color: #374151;
+  font-size: 1.7rem;
+  line-height: 1.2;
+}
+
+.dash-kicker {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.dash-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #374151;
+  font-weight: 700;
+}
+
+.dash-signout {
+  padding: 0.5rem 0.9rem;
+}
+
+.dash-alerts {
+  margin-bottom: 1rem;
+}
+
+.dash-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.dash-stat,
+.dash-panel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.dash-stat {
+  padding: 1rem 1.1rem;
+  color: #374151;
+}
+
+.dash-stat:hover {
+  border-color: #1b7a3a;
+  color: #14532d;
+}
+
+.dash-stat span {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.dash-stat strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.7rem;
+  color: #1b7a3a;
+}
+
+.dash-panel {
+  padding: 1.1rem 1.2rem;
+}
+
+.dash-panel-head,
+.dash-toolbar,
+.dash-form-actions,
+.dash-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.dash-panel-head h2,
+.dash-message h2 {
+  color: #374151;
+  font-size: 1.05rem;
+}
+
+.dash-toolbar {
+  margin-bottom: 1rem;
+}
+
+.dash-search {
+  display: flex;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.dash-search .form-input {
+  max-width: 280px;
+}
+
+.dash-table-wrap {
+  overflow-x: auto;
+}
+
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dash-table th,
+.dash-table td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #374151;
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.dash-table th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.dash-actions {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.dash-actions button,
+.dash-danger {
+  background: none;
+  border: 0;
+  color: #b91c1c;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dash-empty,
+.dash-help {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.dash-field-error {
+  color: #b91c1c;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.dash-form-panel {
+  max-width: 760px;
+}
+
+.dash-form-actions {
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+}
+
+.dash-message-list {
+  list-style: none;
+}
+
+.dash-message-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dash-message-list a {
+  color: #374151;
+}
+
+.dash-message-list span,
+.dash-message-list em {
+  display: block;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-style: normal;
+}
+
+.dash-message-list em {
+  color: #1b7a3a;
+  font-weight: 800;
+}
+
+.dash-message-body {
+  margin: 1rem 0 1.25rem;
+  color: #1e293b;
+}
+
+.dash-pager {
+  justify-content: flex-end;
+  margin-top: 1rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.dash-check {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.dash-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.dash-login-card {
+  width: min(100%, 420px);
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+.dash-login-card img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+}
+
+.dash-login-card h1 {
+  color: #374151;
+  font-size: 1.5rem;
+}
+
+.dash-login-card p {
+  color: #64748b;
+  margin: 0.4rem 0 1.1rem;
+}
+
+.dash-submit {
+  width: 100%;
+}
+
+.dash-back {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  font-weight: 700;
+}
+
+.account-facts {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.account-facts div {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0.75rem;
+}
+
+.account-facts dt {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.account-facts dd {
+  color: #374151;
+  margin: 0;
+}
+
+.account-warning {
+  margin-bottom: 1rem;
+}
+
+.account-warning h2,
+.dash-panel > h2 {
+  color: #374151;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.dash-inline-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.cms-section-field {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+}
+
+.dash-check-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.4rem 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .dash-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-sidebar {
+    position: static;
+  }
+
+  .dash-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dash-topbar,
+  .dash-toolbar,
+  .dash-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dash-search .form-input {
+    max-width: none;
+  }
+
+  .dash-main {
+    padding: 1rem;
+  }
+
+  .account-facts div {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .dash-cards {
+    grid-template-columns: 1fr;
+  }
+}
