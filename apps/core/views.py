@@ -1,7 +1,7 @@
 import logging
 
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.urls import reverse
 from .models import (
@@ -82,6 +82,18 @@ def programs(request):
         "cms": get_page_sections("programs"),
     }
     return render(request, "core/programs.html", context)
+
+
+def program_detail(request, slug):
+    program = get_object_or_404(Program, slug=slug)
+    related = Program.objects.exclude(pk=program.pk).filter(category=program.category)[:3]
+    context = {
+        "page_title": f"{program.title} - MPCR",
+        "program": program,
+        "related_programs": related,
+        "cms": get_page_sections("programs"),
+    }
+    return render(request, "core/program_detail.html", context)
 
 
 def gallery(request):

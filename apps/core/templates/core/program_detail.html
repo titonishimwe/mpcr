@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ program.title }} - MPCR{% endblock %}
+
+{% block content %}
+<section class="programs-page-banner">
+  <div class="container">
+    <h1>{{ program.title }}</h1>
+    <p>{{ program.get_category_display }}{% if program.location %} · {{ program.location }}{% endif %}</p>
+    <nav class="programs-breadcrumb" aria-label="Breadcrumb">
+      <a href="{% url 'home' %}">Home</a>
+      <span>&gt;</span>
+      <a href="{% url 'programs' %}">Programs</a>
+      <span>&gt;</span>
+      <span>{{ program.title|truncatewords:6 }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="program-detail-section">
+  <div class="container">
+    <article class="program-detail-card">
+      <div class="program-detail-media">
+        {% if program.image %}
+          <img src="{{ program.image.url }}" alt="{{ program.title }}">
+        {% elif program.image_url %}
+          <img src="{{ program.image_url }}" alt="{{ program.title }}">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80" alt="{{ program.title }}">
+        {% endif %}
+      </div>
+      <div class="program-detail-body">
+        <p class="program-detail-summary">{{ program.summary }}</p>
+        <h2>Full description</h2>
+        <div class="program-detail-text">{{ program.description|linebreaks }}</div>
+        {% if program.activity_points %}
+          <h2>Core Activities</h2>
+          <ul>
+            {% for point in program.activity_points %}
+              <li>{{ point }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% if program.target_beneficiaries %}
+          <p><strong>Target beneficiaries:</strong> {{ program.target_beneficiaries }}</p>
+        {% endif %}
+        <div class="program-detail-actions">
+          <a href="{% url 'programs' %}" class="btn btn-outline">Back to programs</a>
+          <a href="{% url 'contact' %}" class="btn btn-primary">Partner on this program</a>
+        </div>
+      </div>
+    </article>
+
+    {% if related_programs %}
+      <div class="section-header" style="margin-top: 3rem;">
+        <h2 class="section-title">Related programs</h2>
+      </div>
+      <div class="programs-grid">
+        {% for item in related_programs %}
+          <article class="program-card">
+            <div class="program-img-wrapper">
+              {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+              {% elif item.image_url %}
+                <img src="{{ item.image_url }}" alt="{{ item.title }}">
+              {% endif %}
+            </div>
+            <div class="program-body">
+              <h3 class="program-title">{{ item.title }}</h3>
+              <p class="program-summary">{{ item.summary|truncatewords:22 }}</p>
+              <a href="{% url 'program_detail' slug=item.slug %}" class="pillar-partner-btn">Read more</a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

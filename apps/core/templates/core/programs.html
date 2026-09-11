@@ -37,17 +37,19 @@
             {% endif %}
           </div>
           <div class="pillar-body">
-            <h3>{{ program.title }}</h3>
-            <p>{{ program.summary }}</p>
-            <h4>Core Activities:</h4>
-            <ul>
-              {% for point in program.activity_points %}
-                <li>{{ point }}</li>
-              {% empty %}
-                <li>{{ program.description }}</li>
-              {% endfor %}
-            </ul>
-            <a href="{% url 'contact' %}" class="pillar-partner-btn">Partner on this Program</a>
+            <div class="pillar-copy">
+              <h3>{{ program.title }}</h3>
+              <p>{{ program.summary }}</p>
+              <h4>Core Activities:</h4>
+              <ul>
+                {% for point in program.activity_points|slice:":3" %}
+                  <li>{{ point }}</li>
+                {% empty %}
+                  <li>{{ program.description|truncatewords:18 }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <a href="{% url 'program_detail' slug=program.slug %}" class="pillar-partner-btn">Read more</a>
           </div>
         </article>
       {% empty %}

@@ -43,8 +43,16 @@ class Program(models.Model):
         return self.title
 
     def activity_points(self):
-        sentences = [part.strip() for part in self.description.replace(";", ".").split(".") if part.strip()]
-        return sentences[:4]
+        raw = (self.description or "").strip()
+        if not raw:
+            return []
+        if "\n" in raw:
+            points = [part.strip(" -\u2022\t") for part in raw.splitlines() if part.strip()]
+        elif ";" in raw:
+            points = [part.strip() for part in raw.split(";") if part.strip()]
+        else:
+            points = [part.strip() for part in raw.replace(";", ".").split(".") if part.strip()]
+        return points[:6]
 
 
 class GalleryImage(models.Model):

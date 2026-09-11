@@ -76,6 +76,13 @@ class MPCRWebpageTests(TestCase):
         filtered_response = self.client.get(reverse("programs") + "?category=development")
         self.assertEqual(filtered_response.status_code, 200)
         self.assertContains(filtered_response, "Agroforestry and Landscape Restoration")
+        detail = self.client.get(reverse("program_detail", kwargs={"slug": self.program.slug}))
+        self.assertEqual(detail.status_code, 200)
+        self.assertContains(detail, "Agroforestry and Landscape Restoration")
+
+        listing = self.client.get(reverse("programs"))
+        self.assertContains(listing, "Read more")
+        self.assertNotContains(listing, "Partner on this Program")
 
     def test_gallery_page_status_and_filter(self):
         response = self.client.get(reverse("gallery"))
