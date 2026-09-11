@@ -62,12 +62,50 @@
 
 <section class="about-preview">
   <div class="container">
-    <div class="org-profile">
+    <div class="org-profile" data-profile-panel>
       <div class="org-profile-copy">
         <span class="section-badge">{{ cms.profile_badge.value }}</span>
         <h2>{{ cms.profile_title.value }}</h2>
-        <p>{{ cms.profile_text_1.value }}</p>
-        <p>{{ cms.profile_text_2.value }}</p>
+
+        <div class="org-profile-preview">
+          <p>{{ cms.profile_text_1.value|md_inline }}</p>
+          <p>{{ cms.profile_text_2.value|md_inline }}</p>
+        </div>
+
+        <button
+          type="button"
+          class="pillar-partner-btn org-profile-toggle"
+          data-profile-toggle
+          data-less-label="{{ cms.profile_read_less_label.value|default:'Show less' }}"
+        >
+          {{ cms.profile_read_more_label.value|default:"Read more" }}
+        </button>
+
+        <div class="org-profile-more" hidden>
+          {% if cms.profile_governance_title.value %}
+            <h3>{{ cms.profile_governance_title.value }}</h3>
+          {% endif %}
+          {% if cms.profile_governance_text.value %}
+            <div class="org-profile-rich">{{ cms.profile_governance_text.value|md_rich }}</div>
+          {% endif %}
+          {% if cms.profile_departments.lines %}
+            <ul class="org-profile-list">
+              {% for item in cms.profile_departments.lines %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if cms.profile_representation_title.value %}
+            <h3>{{ cms.profile_representation_title.value }}</h3>
+          {% endif %}
+          {% if cms.profile_representation_text.value %}
+            <div class="org-profile-rich">{{ cms.profile_representation_text.value|md_rich }}</div>
+          {% endif %}
+          {% if cms.profile_closing.value %}
+            <p>{{ cms.profile_closing.value|md_inline }}</p>
+          {% endif %}
+        </div>
+
         <blockquote class="org-quote">{{ cms.profile_quote.value }}</blockquote>
       </div>
       <div class="org-profile-media">

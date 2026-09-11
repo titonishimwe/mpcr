@@ -148,6 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Organizational profile expand / collapse
+  document.querySelectorAll('[data-profile-panel]').forEach((panel) => {
+    const toggle = panel.querySelector('[data-profile-toggle]');
+    const more = panel.querySelector('.org-profile-more');
+    if (!toggle || !more) return;
+
+    const moreLabel = toggle.textContent.trim() || 'Read more';
+    const lessLabel = toggle.getAttribute('data-less-label') || 'Show less';
+
+    toggle.addEventListener('click', () => {
+      const expanded = panel.classList.toggle('is-expanded');
+      more.hidden = !expanded;
+      toggle.textContent = expanded ? lessLabel : moreLabel;
+    });
+  });
+
   // 3. Auto-dismiss alerts after 6 seconds
   const alerts = document.querySelectorAll('.alert');
   if (alerts.length > 0) {

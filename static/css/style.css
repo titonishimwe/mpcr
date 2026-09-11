@@ -794,9 +794,13 @@ iframe {
 
 .org-profile {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 3.5rem;
-  align-items: center;
+  align-items: start;
+}
+
+.org-profile-copy {
+  min-width: 0;
 }
 
 .org-profile-copy h2 {
@@ -807,20 +811,52 @@ iframe {
   line-height: 1.15;
 }
 
-.org-profile-copy p {
+.org-profile-copy h3 {
+  color: var(--primary-navy);
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 1.25rem 0 0.65rem;
+}
+
+.org-profile-copy p,
+.org-profile-rich {
   color: var(--text-muted);
   font-size: 1.02rem;
   margin-bottom: 1.15rem;
   line-height: 1.7;
 }
 
-.org-profile-copy p strong {
+.org-profile-copy p strong,
+.org-profile-rich strong {
   color: var(--text-main);
   font-weight: 700;
 }
 
+.org-profile-preview {
+  display: block;
+}
+
+.org-profile-more {
+  margin-top: 1rem;
+}
+
+.org-profile-list {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin: 0 0 1.15rem;
+  color: var(--text-muted);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 1.25rem;
+}
+
+.org-profile-toggle {
+  margin: 0.25rem 0 0.5rem;
+}
+
 .org-quote {
   margin-top: 1.5rem;
+  margin-bottom: 1rem;
   padding: 1.1rem 1.25rem;
   background: #f7faf8;
   border-left: 4px solid var(--accent-gold);
@@ -831,10 +867,14 @@ iframe {
   line-height: 1.55;
 }
 
+.org-profile-media {
+  position: sticky;
+  top: 100px;
+}
+
 .org-profile-media img {
   width: 100%;
-  height: 100%;
-  min-height: 360px;
+  height: 420px;
   object-fit: cover;
   object-position: center top;
   border-radius: 6px;
@@ -2151,6 +2191,15 @@ iframe {
   .two-col-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .org-profile-media {
+    position: static;
+  }
+  .org-profile-media img {
+    height: 280px;
+  }
+  .org-profile-list {
+    grid-template-columns: 1fr;
   }
   .contact-grid {
     grid-template-columns: 1fr;
