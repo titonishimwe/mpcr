@@ -50,11 +50,13 @@ RESOURCES = {
         "title": "Programs",
         "singular": "program",
         "search": ["title", "summary", "location"],
+        "visibility_field": "is_published",
         "columns": [
             ("title", "Title"),
             ("get_category_display", "Category"),
             ("location", "Location"),
             ("is_featured", "Featured"),
+            ("is_published", "Visibility"),
             ("order", "Order"),
         ],
     },
@@ -64,11 +66,13 @@ RESOURCES = {
         "title": "Gallery",
         "singular": "photo",
         "search": ["title", "caption", "location"],
+        "visibility_field": "is_published",
         "columns": [
             ("title", "Title"),
             ("get_category_display", "Category"),
             ("location", "Location"),
             ("is_featured", "Featured"),
+            ("is_published", "Visibility"),
             ("order", "Order"),
         ],
     },
@@ -78,12 +82,13 @@ RESOURCES = {
         "title": "Team",
         "singular": "team member",
         "search": ["name", "position", "email", "phone"],
+        "visibility_field": "is_active",
         "columns": [
             ("name", "Name"),
             ("position", "Position"),
             ("phone", "Phone"),
             ("email", "Email"),
-            ("is_active", "Active"),
+            ("is_active", "Visibility"),
         ],
     },
     "partners": {
@@ -92,10 +97,12 @@ RESOURCES = {
         "title": "Partners",
         "singular": "partner",
         "search": ["name", "category"],
+        "visibility_field": "is_published",
         "columns": [
             ("name", "Name"),
             ("category", "Mark"),
             ("website", "Website"),
+            ("is_published", "Visibility"),
             ("order", "Order"),
         ],
     },
@@ -105,10 +112,12 @@ RESOURCES = {
         "title": "Impact stats",
         "singular": "statistic",
         "search": ["label", "value", "description"],
+        "visibility_field": "is_published",
         "columns": [
             ("value", "Value"),
             ("label", "Label"),
             ("description", "Description"),
+            ("is_published", "Visibility"),
             ("order", "Order"),
         ],
     },
@@ -118,10 +127,12 @@ RESOURCES = {
         "title": "Testimonials",
         "singular": "testimonial",
         "search": ["author", "role", "quote", "location"],
+        "visibility_field": "is_published",
         "columns": [
             ("author", "Author"),
             ("role", "Role"),
             ("location", "Location"),
+            ("is_published", "Visibility"),
             ("order", "Order"),
         ],
     },
@@ -209,11 +220,11 @@ def dashboard_home(request):
 
 def _row_values(obj, columns):
     values = []
-    for attr, _label in columns:
+    for attr, label in columns:
         value = getattr(obj, attr)
         if callable(value):
             value = value()
-        values.append(value)
+        values.append((attr, label, value))
     return values
 
 
@@ -230,7 +241,13 @@ def resource_list(request, resource):
 
     paginator = Paginator(queryset, 12)
     page = paginator.get_page(request.GET.get("page"))
-    rows = [(obj, _row_values(obj, config["columns"])) for obj in page.object_list]
+    visibility_field = config.get("visibility_field")
+    rows = []
+    for obj in page.object_list:
+        is_visible = True
+        if visibility_field:
+            is_visible = bool(getattr(obj, visibility_field))
+        rows.append((obj, _row_values(obj, config["columns"]), is_visible))
 
     return render(
         request,
@@ -243,6 +260,7 @@ def resource_list(request, resource):
             page_obj=page,
             rows=rows,
             query=query,
+            visibility_field=visibility_field,
         ),
     )
 
@@ -302,6 +320,25 @@ def resource_delete(request, resource, pk):
     obj = get_object_or_404(config["model"], pk=pk)
     obj.delete()
     messages.success(request, f"{config['singular'].title()} deleted.")
+    return redirect("dashboard_list", resource=resource)
+
+
+@_staff_required
+@require_POST
+def resource_toggle_visibility(request, resource, pk):
+    config = resource_config(resource)
+    field_name = config.get("visibility_field")
+    if not field_name:
+        raise Http404("Visibility toggle is not available for this section")
+
+    obj = get_object_or_404(config["model"], pk=pk)
+    current = bool(getattr(obj, field_name))
+    setattr(obj, field_name, not current)
+    obj.save(update_fields=[field_name])
+    if getattr(obj, field_name):
+        messages.success(request, f"{config['singular'].title()} is now visible on the public site.")
+    else:
+        messages.success(request, f"{config['singular'].title()} is hidden from the public site.")
     return redirect("dashboard_list", resource=resource)
 
 

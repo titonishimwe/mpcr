@@ -25,6 +25,10 @@ class Program(models.Model):
     target_beneficiaries = models.CharField(max_length=255, blank=True, default="Vulnerable households, women, youth")
     location = models.CharField(max_length=255, blank=True, default="Gatsibo, Rutsiro, Nyarugenge, Nyanza")
     is_featured = models.BooleanField(default=True)
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Unpublished programs stay in the dashboard but are hidden from the public site.",
+    )
     order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -36,7 +40,13 @@ class Program(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            base = slugify(self.title) or "program"
+            slug = base
+            counter = 2
+            while Program.objects.filter(slug=slug).exclude(pk=self.pk).exists():
+                slug = f"{base}-{counter}"
+                counter += 1
+            self.slug = slug
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -58,14 +68,18 @@ class Program(models.Model):
 class GalleryImage(models.Model):
     CATEGORY_CHOICES = CONTENT_CATEGORY_CHOICES
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True, default="")
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default="evangelism")
-    caption = models.TextField(blank=True)
+    caption = models.TextField(blank=True, default="")
     image = models.ImageField(upload_to="gallery/", blank=True, null=True)
-    image_url = models.CharField(max_length=500, blank=True, help_text="Fallback or local static photo URL")
-    location = models.CharField(max_length=200, blank=True)
-    date_taken = models.CharField(max_length=100, blank=True, default="2024-2026")
+    image_url = models.CharField(max_length=500, blank=True, default="", help_text="Fallback or local static photo URL")
+    location = models.CharField(max_length=200, blank=True, default="")
+    date_taken = models.CharField(max_length=100, blank=True, default="")
     is_featured = models.BooleanField(default=True)
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Unpublished photos stay in the dashboard but are hidden from the public site.",
+    )
     order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -75,7 +89,7 @@ class GalleryImage(models.Model):
         verbose_name_plural = "Gallery Photos"
 
     def __str__(self):
-        return self.title
+        return self.title.strip() or f"Gallery photo #{self.pk or 'new'}"
 
 
 class ContactMessage(models.Model):
@@ -101,6 +115,10 @@ class ImpactStat(models.Model):
     value = models.CharField(max_length=50)
     description = models.CharField(max_length=200, blank=True)
     icon = models.CharField(max_length=50, default="check-circle")
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Unpublished stats stay in the dashboard but are hidden from the public site.",
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -118,6 +136,10 @@ class Partner(models.Model):
     logo = models.ImageField(upload_to="partners/", blank=True, null=True)
     logo_url = models.CharField(max_length=500, blank=True)
     website = models.URLField(blank=True)
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Unpublished partners stay in the dashboard but are hidden from the public site.",
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -148,7 +170,10 @@ class TeamMember(models.Model):
     email = models.EmailField(blank=True)
     photo = models.ImageField(upload_to="team/", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Inactive members stay in the dashboard but are hidden from the public site.",
+    )
 
     class Meta:
         ordering = ["order", "name"]
@@ -174,6 +199,10 @@ class Testimonial(models.Model):
     quote = models.TextField()
     location = models.CharField(max_length=150, default="Gatsibo District, Rwanda")
     image_url = models.CharField(max_length=500, blank=True)
+    is_published = models.BooleanField(
+        default=True,
+        help_text="Unpublished testimonials stay in the dashboard but are hidden from the public site.",
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -336,7 +365,10 @@ class HeroSlide(models.Model):
     image = models.ImageField(upload_to="hero/", blank=True, null=True)
     image_url = models.CharField(max_length=500, blank=True)
     order = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(
+        default=True,
+        help_text="Inactive slides stay in the dashboard but are hidden from the public site.",
+    )
 
     class Meta:
         ordering = ["order", "id"]

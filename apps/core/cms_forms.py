@@ -42,7 +42,9 @@ class HeroSlideForm(DashboardFormMixin, forms.ModelForm):
     class Meta:
         model = HeroSlide
         fields = ["title", "image", "image_url", "order", "is_active"]
+        labels = {"is_active": "Visible on site"}
         help_texts = {
             "image": "Upload a hero background image.",
             "image_url": "Optional static path or URL if no upload is used.",
+            "is_active": "Uncheck to hide from the public site without deleting.",
         }

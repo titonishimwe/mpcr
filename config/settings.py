@@ -160,6 +160,7 @@ CSRF_COOKIE_SAMESITE = "Lax"
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+CSRF_FAILURE_VIEW = "apps.core.views.csrf_failure"
 
 if not DEBUG:
     SESSION_COOKIE_SECURE = True

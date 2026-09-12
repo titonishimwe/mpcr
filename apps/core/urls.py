@@ -26,6 +26,7 @@ urlpatterns = [
     path("dashboard/content/hero/", cms_views.cms_hero_list, name="cms_hero_list"),
     path("dashboard/content/hero/new/", cms_views.cms_hero_create, name="cms_hero_create"),
     path("dashboard/content/hero/<int:pk>/edit/", cms_views.cms_hero_edit, name="cms_hero_edit"),
+    path("dashboard/content/hero/<int:pk>/toggle/", cms_views.cms_hero_toggle, name="cms_hero_toggle"),
     path("dashboard/content/hero/<int:pk>/delete/", cms_views.cms_hero_delete, name="cms_hero_delete"),
     path("dashboard/content/pages/<str:page>/", cms_views.cms_page_edit, name="cms_page_edit"),
     path("dashboard/", dashboard_views.dashboard_home, name="dashboard"),
@@ -34,5 +35,6 @@ urlpatterns = [
     path("dashboard/<str:resource>/", dashboard_views.resource_list, name="dashboard_list"),
     path("dashboard/<str:resource>/new/", dashboard_views.resource_create, name="dashboard_create"),
     path("dashboard/<str:resource>/<int:pk>/edit/", dashboard_views.resource_edit, name="dashboard_edit"),
+    path("dashboard/<str:resource>/<int:pk>/toggle/", dashboard_views.resource_toggle_visibility, name="dashboard_toggle"),
     path("dashboard/<str:resource>/<int:pk>/delete/", dashboard_views.resource_delete, name="dashboard_delete"),
 ]

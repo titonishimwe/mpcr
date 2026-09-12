@@ -5,7 +5,7 @@
 
 {% block content %}
 <section class="dash-toolbar">
-  <p class="dash-help">These images rotate behind the home page hero text.</p>
+  <p class="dash-help">These images rotate behind the home page hero text. Hide a slide to keep it without deleting.</p>
   <a href="{% url 'cms_hero_create' %}" class="btn btn-primary">Add slide</a>
 </section>
 
@@ -18,13 +18,13 @@
             <th>Preview</th>
             <th>Title</th>
             <th>Order</th>
-            <th>Active</th>
+            <th>Visibility</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for slide in slides %}
-            <tr>
+            <tr{% if not slide.is_active %} class="is-hidden-row"{% endif %}>
               <td>
                 {% if slide.media_url %}
                   <img src="{{ slide.media_url|cms_media }}" alt="" style="width:96px;height:56px;object-fit:cover;border-radius:6px;">
@@ -34,9 +34,23 @@
               </td>
               <td>{{ slide.title|default:"Untitled" }}</td>
               <td>{{ slide.order }}</td>
-              <td>{% if slide.is_active %}Yes{% else %}No{% endif %}</td>
+              <td>
+                {% if slide.is_active %}
+                  <span class="dash-badge dash-badge-public">Public</span>
+                {% else %}
+                  <span class="dash-badge dash-badge-hidden">Hidden</span>
+                {% endif %}
+              </td>
               <td class="dash-actions">
                 <a href="{% url 'cms_hero_edit' pk=slide.pk %}">Edit</a>
+                <form method="post" action="{% url 'cms_hero_toggle' pk=slide.pk %}">
+                  {% csrf_token %}
+                  {% if slide.is_active %}
+                    <button type="submit" class="dash-toggle">Hide</button>
+                  {% else %}
+                    <button type="submit" class="dash-toggle is-show">Show</button>
+                  {% endif %}
+                </form>
                 <form method="post" action="{% url 'cms_hero_delete' pk=slide.pk %}" onsubmit="return confirm('Delete this slide?');">
                   {% csrf_token %}
                   <button type="submit">Delete</button>

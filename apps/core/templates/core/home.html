@@ -139,10 +139,8 @@
             <h3 class="program-title">{{ program.title }}</h3>
             <p class="program-summary">{{ program.summary }}</p>
             <div class="program-meta">
-              <div class="program-meta-item">
-                <i class="fas fa-map-pin"></i>
-                <span>{{ program.location }}</span>
-              </div>
+              <a href="{% url 'program_detail' slug=program.slug %}" class="program-explore">Explore More</a>
+              <time class="program-date" datetime="{{ program.created_at|date:'Y-m-d' }}">{{ program.created_at|date:"M j, Y" }}</time>
             </div>
           </div>
         </article>
@@ -173,17 +171,19 @@
              data-caption="{{ photo.caption }}"
              data-location="{{ photo.location }}">
           {% if photo.image %}
-            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+            <img src="{{ photo.image.url }}" alt="{{ photo.title|default:'Gallery photo' }}" loading="lazy">
           {% else %}
-            <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy">
+            <img src="{{ photo.image_url }}" alt="{{ photo.title|default:'Gallery photo' }}" loading="lazy">
           {% endif %}
-          <div class="gallery-overlay">
-            <h4 class="gallery-title">{{ photo.title }}</h4>
-            <p class="gallery-caption">{{ photo.caption|truncatewords:14 }}</p>
-            {% if photo.location %}
-              <span class="gallery-location"><i class="fas fa-map-marker-alt"></i> {{ photo.location }}</span>
-            {% endif %}
-          </div>
+          {% if photo.title or photo.caption or photo.location %}
+            <div class="gallery-overlay">
+              {% if photo.title %}<h4 class="gallery-title">{{ photo.title }}</h4>{% endif %}
+              {% if photo.caption %}<p class="gallery-caption">{{ photo.caption|truncatewords:14 }}</p>{% endif %}
+              {% if photo.location %}
+                <span class="gallery-location"><i class="fas fa-map-marker-alt"></i> {{ photo.location }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
       {% endfor %}
     </div>

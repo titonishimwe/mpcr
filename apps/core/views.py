@@ -7,7 +7,6 @@ from django.urls import reverse
 from .models import (
     GalleryImage,
     HeroSlide,
-    ImpactStat,
     Partner,
     Program,
     TeamMember,
@@ -28,10 +27,10 @@ def paginate(request, queryset, per_page):
 
 def home(request):
     ensure_cms_defaults()
-    featured_programs = Program.objects.filter(is_featured=True)[:6]
-    preview_gallery = GalleryImage.objects.filter(is_featured=True)[:6]
+    featured_programs = Program.objects.filter(is_published=True, is_featured=True)[:6]
+    preview_gallery = GalleryImage.objects.filter(is_published=True, is_featured=True)[:6]
     team_members = TeamMember.objects.filter(is_active=True)
-    partners = Partner.objects.all()
+    partners = Partner.objects.filter(is_published=True)
     hero_slides = list(HeroSlide.objects.filter(is_active=True))
     if not hero_slides:
         ensure_cms_defaults()
@@ -50,13 +49,8 @@ def home(request):
 
 
 def about(request):
-    partners = Partner.objects.all()
-    stats = ImpactStat.objects.all()[:4]
-
     context = {
         "page_title": "About Us - Movement for Christ in Rwanda",
-        "partners": partners,
-        "stats": stats,
         "cms": get_page_sections("about"),
     }
     return render(request, "core/about.html", context)
@@ -64,10 +58,9 @@ def about(request):
 
 def programs(request):
     selected_category = request.GET.get("category", "all")
+    programs_list = Program.objects.filter(is_published=True)
     if selected_category and selected_category != "all":
-        programs_list = Program.objects.filter(category=selected_category)
-    else:
-        programs_list = Program.objects.all()
+        programs_list = programs_list.filter(category=selected_category)
 
     categories = Program.CATEGORY_CHOICES
     programs_page, pagination_query = paginate(request, programs_list, 6)
@@ -85,8 +78,11 @@ def programs(request):
 
 
 def program_detail(request, slug):
-    program = get_object_or_404(Program, slug=slug)
-    related = Program.objects.exclude(pk=program.pk).filter(category=program.category)[:3]
+    program = get_object_or_404(Program, slug=slug, is_published=True)
+    related = (
+        Program.objects.filter(is_published=True, category=program.category)
+        .exclude(pk=program.pk)[:3]
+    )
     context = {
         "page_title": f"{program.title} - MPCR",
         "program": program,
@@ -98,10 +94,9 @@ def program_detail(request, slug):
 
 def gallery(request):
     selected_category = request.GET.get("category", "all")
+    photos_list = GalleryImage.objects.filter(is_published=True)
     if selected_category and selected_category != "all":
-        photos_list = GalleryImage.objects.filter(category=selected_category)
-    else:
-        photos_list = GalleryImage.objects.all()
+        photos_list = photos_list.filter(category=selected_category)
 
     categories = GalleryImage.CATEGORY_CHOICES
     photos_page, pagination_query = paginate(request, photos_list, 9)
@@ -155,3 +150,18 @@ def custom_server_error(request):
 
 def custom_permission_denied(request, exception=None):
     return render(request, "403.html", {"page_title": "Access Denied"}, status=403)
+
+
+def csrf_failure(request, reason=""):
+    """Friendly page when a form was submitted with an expired/stale CSRF token."""
+    logger.warning("CSRF failure on %s: %s", request.path, reason)
+    return render(
+        request,
+        "403_csrf.html",
+        {
+            "page_title": "Session expired",
+            "reason": reason,
+            "retry_url": request.path,
+        },
+        status=403,
+    )

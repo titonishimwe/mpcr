@@ -198,9 +198,9 @@ class DashboardTests(TestCase):
                 "description": "Bible study groups for youth and families.",
                 "target_beneficiaries": "Youth and families",
                 "location": "Nyarugenge",
-                "icon": "cross",
                 "image_url": "",
                 "is_featured": "on",
+                "is_published": "on",
                 "order": "2",
             },
         )
@@ -209,6 +209,7 @@ class DashboardTests(TestCase):
 
         listing = self.client.get(reverse("dashboard_list", kwargs={"resource": "programs"}))
         self.assertContains(listing, "Village Bible Study")
+        self.assertContains(listing, "Hide")
 
         updated = self.client.post(
             reverse("dashboard_edit", kwargs={"resource": "programs", "pk": program.pk}),
@@ -220,9 +221,9 @@ class DashboardTests(TestCase):
                 "description": "Bible study groups for youth and families.",
                 "target_beneficiaries": "Youth and families",
                 "location": "Nyarugenge",
-                "icon": "cross",
                 "image_url": "",
                 "is_featured": "on",
+                "is_published": "on",
                 "order": "3",
             },
         )
@@ -235,6 +236,39 @@ class DashboardTests(TestCase):
         )
         self.assertEqual(deleted.status_code, 302)
         self.assertFalse(Program.objects.filter(pk=program.pk).exists())
+
+    def test_staff_can_hide_program_without_deleting(self):
+        program = Program.objects.create(
+            title="Hidden Draft Program",
+            category="evangelism",
+            summary="Draft summary",
+            description="Draft description",
+            is_featured=True,
+            is_published=True,
+        )
+        self.client.login(username="mpcradmin", password="dashboard-pass-123")
+        public = self.client.get(reverse("program_detail", kwargs={"slug": program.slug}))
+        self.assertEqual(public.status_code, 200)
+
+        hidden = self.client.post(
+            reverse("dashboard_toggle", kwargs={"resource": "programs", "pk": program.pk})
+        )
+        self.assertEqual(hidden.status_code, 302)
+        program.refresh_from_db()
+        self.assertFalse(program.is_published)
+        self.assertTrue(Program.objects.filter(pk=program.pk).exists())
+
+        blocked = self.client.get(reverse("program_detail", kwargs={"slug": program.slug}))
+        self.assertEqual(blocked.status_code, 404)
+        listing = self.client.get(reverse("programs"))
+        self.assertNotContains(listing, program.title)
+
+        shown = self.client.post(
+            reverse("dashboard_toggle", kwargs={"resource": "programs", "pk": program.pk})
+        )
+        self.assertEqual(shown.status_code, 302)
+        program.refresh_from_db()
+        self.assertTrue(program.is_published)
 
     def test_staff_can_read_contact_message(self):
         message = ContactMessage.objects.create(

@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 
 from .cms_defaults import PAGES
@@ -56,6 +57,7 @@ def cms_site_settings(request):
 
 
 @_staff_required
+@ensure_csrf_cookie
 def cms_page_edit(request, page):
     if page not in PAGES:
         messages.error(request, "Unknown page.")
@@ -157,4 +159,17 @@ def cms_hero_delete(request, pk):
     slide = get_object_or_404(HeroSlide, pk=pk)
     slide.delete()
     messages.success(request, "Hero slide deleted.")
+    return redirect("cms_hero_list")
+
+
+@_staff_required
+@require_POST
+def cms_hero_toggle(request, pk):
+    slide = get_object_or_404(HeroSlide, pk=pk)
+    slide.is_active = not slide.is_active
+    slide.save(update_fields=["is_active"])
+    if slide.is_active:
+        messages.success(request, "Hero slide is now visible on the public site.")
+    else:
+        messages.success(request, "Hero slide is hidden from the public site.")
     return redirect("cms_hero_list")

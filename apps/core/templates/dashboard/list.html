@@ -24,11 +24,17 @@
           </tr>
         </thead>
         <tbody>
-          {% for obj, values in rows %}
-            <tr>
-              {% for value in values %}
+          {% for obj, values, is_visible in rows %}
+            <tr{% if not is_visible %} class="is-hidden-row"{% endif %}>
+              {% for attr, label, value in values %}
                 <td>
-                  {% if value is True %}
+                  {% if visibility_field and attr == visibility_field %}
+                    {% if value %}
+                      <span class="dash-badge dash-badge-public">Public</span>
+                    {% else %}
+                      <span class="dash-badge dash-badge-hidden">Hidden</span>
+                    {% endif %}
+                  {% elif value is True %}
                     Yes
                   {% elif value is False %}
                     No
@@ -39,6 +45,16 @@
               {% endfor %}
               <td class="dash-actions">
                 <a href="{% url 'dashboard_edit' resource=resource pk=obj.pk %}">Edit</a>
+                {% if visibility_field %}
+                  <form method="post" action="{% url 'dashboard_toggle' resource=resource pk=obj.pk %}">
+                    {% csrf_token %}
+                    {% if is_visible %}
+                      <button type="submit" class="dash-toggle">Hide</button>
+                    {% else %}
+                      <button type="submit" class="dash-toggle is-show">Show</button>
+                    {% endif %}
+                  </form>
+                {% endif %}
                 <form method="post" action="{% url 'dashboard_delete' resource=resource pk=obj.pk %}" onsubmit="return confirm('Delete this {{ config.singular }}?');">
                   {% csrf_token %}
                   <button type="submit">Delete</button>

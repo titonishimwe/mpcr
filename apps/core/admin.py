@@ -39,14 +39,14 @@ class HeroSlideAdmin(admin.ModelAdmin):
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "is_featured", "order", "created_at"]
-    list_filter = ["category", "is_featured"]
+    list_display = ["title", "category", "is_featured", "is_published", "order", "created_at"]
+    list_filter = ["category", "is_featured", "is_published"]
     search_fields = ["title", "summary", "description", "location"]
     prepopulated_fields = {"slug": ("title",)}
-    list_editable = ["is_featured", "order"]
+    list_editable = ["is_featured", "is_published", "order"]
     fieldsets = (
         ("Basic Information", {
-            "fields": ("title", "slug", "category", "order", "is_featured")
+            "fields": ("title", "slug", "category", "order", "is_featured", "is_published")
         }),
         ("Content & Details", {
             "fields": ("summary", "description", "target_beneficiaries", "location")
@@ -59,10 +59,10 @@ class ProgramAdmin(admin.ModelAdmin):
 
 @admin.register(GalleryImage)
 class GalleryImageAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "location", "date_taken", "is_featured", "order", "created_at"]
-    list_filter = ["category", "is_featured"]
+    list_display = ["title", "category", "location", "date_taken", "is_featured", "is_published", "order", "created_at"]
+    list_filter = ["category", "is_featured", "is_published"]
     search_fields = ["title", "caption", "location"]
-    list_editable = ["is_featured", "order"]
+    list_editable = ["is_featured", "is_published", "order"]
 
 
 @admin.register(ContactMessage)
@@ -84,8 +84,9 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
 @admin.register(ImpactStat)
 class ImpactStatAdmin(admin.ModelAdmin):
-    list_display = ["value", "label", "description", "icon", "order"]
-    list_editable = ["order"]
+    list_display = ["value", "label", "description", "icon", "is_published", "order"]
+    list_filter = ["is_published"]
+    list_editable = ["is_published", "order"]
 
 
 @admin.register(TeamMember)
@@ -99,13 +100,15 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    list_display = ["name", "category", "website", "order"]
+    list_display = ["name", "category", "website", "is_published", "order"]
+    list_filter = ["is_published"]
     search_fields = ["name", "category"]
-    list_editable = ["order"]
+    list_editable = ["is_published", "order"]
 
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ["author", "role", "location", "order"]
+    list_display = ["author", "role", "location", "is_published", "order"]
+    list_filter = ["is_published"]
     search_fields = ["author", "quote", "location"]
-    list_editable = ["order"]
+    list_editable = ["is_published", "order"]

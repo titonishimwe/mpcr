@@ -768,20 +768,29 @@ iframe {
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.program-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.program-explore {
+  color: var(--accent-green);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
-.program-meta-item i {
-  color: var(--accent-green);
+.program-explore:hover {
+  color: var(--primary-navy);
+}
+
+.program-date {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
 }
 
 /* ==========================================================================
@@ -881,11 +890,54 @@ iframe {
   box-shadow: var(--shadow-md);
 }
 
+.about-history {
+  padding: 5rem 0;
+  background: #ffffff;
+}
+
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 3.5rem;
   align-items: center;
+}
+
+.about-history-copy {
+  min-width: 0;
+}
+
+.about-history-copy h2 {
+  font-size: clamp(1.85rem, 2.4vw, 2.35rem);
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.about-history-copy p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.15rem;
+}
+
+.about-history-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-history-media {
+  position: relative;
+  min-width: 0;
+}
+
+.about-history-media img {
+  display: block;
+  width: 100%;
+  height: 440px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
 }
 
 .about-narrative h2 {
@@ -2191,6 +2243,9 @@ iframe {
   .two-col-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .about-history-media img {
+    height: 300px;
   }
   .org-profile-media {
     position: static;

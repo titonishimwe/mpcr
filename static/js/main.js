@@ -117,9 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const loc = item.getAttribute('data-location') || '';
 
         if (modalImg) modalImg.src = imgSrc;
-        if (modalTitle) modalTitle.textContent = title;
-        if (modalCaption) modalCaption.textContent = caption;
-        if (modalLocation) modalLocation.textContent = loc;
+        if (modalTitle) {
+          modalTitle.textContent = title;
+          modalTitle.hidden = !title.trim();
+        }
+        if (modalCaption) {
+          modalCaption.textContent = caption;
+          modalCaption.hidden = !caption.trim();
+        }
+        if (modalLocation) {
+          modalLocation.textContent = loc;
+          modalLocation.hidden = !loc.trim();
+        }
 
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden'; // Prevent background scrolling

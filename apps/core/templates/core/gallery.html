@@ -37,21 +37,25 @@
              data-img="{% if photo.image %}{{ photo.image.url }}{% else %}{{ photo.image_url }}{% endif %}"
              data-title="{{ photo.title }}"
              data-caption="{{ photo.caption }}"
-             data-location="{{ photo.location }}">
+             data-location="{% if photo.location %}{{ photo.location }}{% endif %}{% if photo.location and photo.date_taken %} • {% endif %}{% if photo.date_taken %}{{ photo.date_taken }}{% endif %}">
           {% if photo.image %}
-            <img src="{{ photo.image.url }}" alt="{{ photo.title }}" loading="lazy">
+            <img src="{{ photo.image.url }}" alt="{{ photo.title|default:'Gallery photo' }}" loading="lazy">
           {% else %}
-            <img src="{{ photo.image_url }}" alt="{{ photo.title }}" loading="lazy">
+            <img src="{{ photo.image_url }}" alt="{{ photo.title|default:'Gallery photo' }}" loading="lazy">
           {% endif %}
-          <div class="gallery-overlay">
-            <h4 class="gallery-title">{{ photo.title }}</h4>
-            <p class="gallery-caption">{{ photo.caption }}</p>
-            {% if photo.location %}
-              <span class="gallery-location">
-                <i class="fas fa-map-marker-alt"></i> {{ photo.location }} • {{ photo.date_taken }}
-              </span>
-            {% endif %}
-          </div>
+          {% if photo.title or photo.caption or photo.location or photo.date_taken %}
+            <div class="gallery-overlay">
+              {% if photo.title %}<h4 class="gallery-title">{{ photo.title }}</h4>{% endif %}
+              {% if photo.caption %}<p class="gallery-caption">{{ photo.caption }}</p>{% endif %}
+              {% if photo.location or photo.date_taken %}
+                <span class="gallery-location">
+                  {% if photo.location %}<i class="fas fa-map-marker-alt"></i> {{ photo.location }}{% endif %}
+                  {% if photo.location and photo.date_taken %} • {% endif %}
+                  {% if photo.date_taken %}{{ photo.date_taken }}{% endif %}
+                </span>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
       {% empty %}
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">

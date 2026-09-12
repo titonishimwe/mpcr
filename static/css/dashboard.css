@@ -218,6 +218,12 @@
   white-space: nowrap;
 }
 
+.dash-actions a {
+  color: var(--accent-green, #1f6b4a);
+  font-weight: 700;
+  text-decoration: none;
+}
+
 .dash-actions button,
 .dash-danger {
   background: none;
@@ -227,6 +233,38 @@
   font-weight: 700;
   cursor: pointer;
   padding: 0;
+}
+
+.dash-actions .dash-toggle {
+  color: #92400e;
+}
+
+.dash-actions .dash-toggle.is-show {
+  color: #1f6b4a;
+}
+
+.dash-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.dash-badge-public {
+  background: #e8f5ef;
+  color: #166534;
+}
+
+.dash-badge-hidden {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.dash-table tr.is-hidden-row td {
+  color: #94a3b8;
 }
 
 .dash-empty,

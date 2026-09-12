@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Session expired{% endblock %}
+
+{% block content %}
+<section class="error-page-section">
+  <div class="container">
+    <h1 class="error-code">403</h1>
+    <h2 class="error-title">Form session expired</h2>
+    <p class="error-desc">
+      Your save could not be verified because the page security token expired
+      (often after signing in again, opening another tab, or leaving the form open too long).
+      Refresh the page and submit again. Your previous edits were not saved.
+    </p>
+    <a href="{{ retry_url|default:'/' }}" class="btn btn-primary">Refresh and try again</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-outline" style="margin-left:0.75rem;">Back to dashboard</a>
+  </div>
+</section>
+{% endblock %}
